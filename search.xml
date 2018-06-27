@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F06%2F27%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[Hello Blank]]></title>
+    <url>%2F2018%2F06%2F27%2FHello-Blank%2F</url>
+    <content type="text"><![CDATA[有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。与大家共勉之。 如果真正在意 typography，那么汉字与西文之间应该插入一个半角空格。Adobe InDesign、Microsoft Word 等对中文与西文混合排版支持较好的软件，都默认增大汉字和西文的间距。 汉学家称这个空白字元为「盘古之白」，因为它劈开了全形字和半形字之间的混沌，增加了文字的 readability。]]></content>
   </entry>
 </search>
