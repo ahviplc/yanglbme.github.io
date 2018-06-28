@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://yanglbme.github.io/2018/06/28/Build-your-own-blog/</loc>
-    <lastmod>2018-06-28T08:03:07.969Z</lastmod>
+    <lastmod>2018-06-28T09:18:33.889Z</lastmod>
     <data>
         <display>
         <title>免费搭建属于自己的博客</title>
@@ -17,16 +17,37 @@
          
          
            
+             
+              <breadCrumb title="Dev" url="https://yanglbme.github.io/categories/Dev/"/>
+          
         </display>
     </data>
     </url>
 
     
-    
+  <url>
+    <loc>https://yanglbme.github.io/2018/06/27/Hello-Blank/</loc>
+    <lastmod>2018-06-28T09:18:25.589Z</lastmod>
+    <data>
+        <display>
+        <title>Hello Blank</title>
+        <pubTime>2018-06-27T12:34:26.000Z</pubTime>
+        
+        <tag>blank</tag>
+         
+         
+           
+             
+              <breadCrumb title="Life" url="https://yanglbme.github.io/categories/Life/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>https://yanglbme.github.io/2018/06/27/Just-Do-IT/</loc>
-    <lastmod>2018-06-28T02:41:07.277Z</lastmod>
+    <lastmod>2018-06-28T09:18:11.235Z</lastmod>
     <data>
         <display>
         <title>Just Do IT</title>
@@ -36,21 +57,9 @@
          
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yanglbme.github.io/2018/06/27/Hello-Blank/</loc>
-    <lastmod>2018-06-28T02:40:40.514Z</lastmod>
-    <data>
-        <display>
-        <title>Hello Blank</title>
-        <pubTime>2018-06-27T12:34:26.000Z</pubTime>
-        
-         
-           
+             
+              <breadCrumb title="Dev" url="https://yanglbme.github.io/categories/Dev/"/>
+          
         </display>
     </data>
     </url>
@@ -58,7 +67,7 @@
     
   <url>
     <loc>https://yanglbme.github.io/2018/06/28/Goodbye-Germany/</loc>
-    <lastmod>2018-06-28T02:39:58.125Z</lastmod>
+    <lastmod>2018-06-28T09:15:28.252Z</lastmod>
     <data>
         <display>
         <title>Goodbye Germany</title>
@@ -66,8 +75,13 @@
         
          
            
+             
+              <breadCrumb title="Life" url="https://yanglbme.github.io/categories/Life/"/>
+          
         </display>
     </data>
     </url>
 
+    
+    
 </urlset>
