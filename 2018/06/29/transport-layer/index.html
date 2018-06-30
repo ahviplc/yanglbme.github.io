@@ -86,22 +86,22 @@
 
 
 
-<meta name="description" content="传输层概述在 OSI 模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。 传输层有两大功能：  复用：在发送端，多个应用进程共有一个传输层。 分用：在接收端，传输层根据端口号将数据分派给不同的应用进程。">
+<meta name="description" content="传输层概述在 OSI（Open System Interconnection, 开发系统互联）七层模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。 传输层有两大功能：  复用：在发送端，多个应用进程共有一个传输层。 分用：在接收端，传输层根据端口号将数据分派给不同的应用进程。">
 <meta name="keywords" content="UDP,TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络——传输层">
 <meta property="og:url" content="https://yanglbme.github.io/2018/06/29/transport-layer/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="传输层概述在 OSI 模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。 传输层有两大功能：  复用：在发送端，多个应用进程共有一个传输层。 分用：在接收端，传输层根据端口号将数据分派给不同的应用进程。">
+<meta property="og:description" content="传输层概述在 OSI（Open System Interconnection, 开发系统互联）七层模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。 传输层有两大功能：  复用：在发送端，多个应用进程共有一个传输层。 分用：在接收端，传输层根据端口号将数据分派给不同的应用进程。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/udp-header.jpg">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/tcp-header.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/tcp-establish-connection.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/slide-window.jpg">
-<meta property="og:updated_time" content="2018-06-29T14:11:02.614Z">
+<meta property="og:updated_time" content="2018-06-30T02:53:51.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络——传输层">
-<meta name="twitter:description" content="传输层概述在 OSI 模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。 传输层有两大功能：  复用：在发送端，多个应用进程共有一个传输层。 分用：在接收端，传输层根据端口号将数据分派给不同的应用进程。">
+<meta name="twitter:description" content="传输层概述在 OSI（Open System Interconnection, 开发系统互联）七层模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。 传输层有两大功能：  复用：在发送端，多个应用进程共有一个传输层。 分用：在接收端，传输层根据端口号将数据分派给不同的应用进程。">
 <meta name="twitter:image" content="http://p9ucdlghd.bkt.clouddn.com/udp-header.jpg">
 
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3,531 word(s)
+                  3,542 word(s)
                 </span>
               
 
@@ -429,7 +429,7 @@
       
 
       
-        <h2 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h2><p>在 OSI 模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。</p>
+        <h2 id="传输层概述"><a href="#传输层概述" class="headerlink" title="传输层概述"></a>传输层概述</h2><p>在 OSI（Open System Interconnection, 开发系统互联）七层模型中，传输层是面向通信的最高层，也是面向用户功能的最底层。</p>
 <p>传输层有两大功能：</p>
 <ul>
 <li>复用：在发送端，多个应用进程共有一个传输层。</li>
@@ -438,7 +438,7 @@
 <a id="more"></a>
 <p>传输层和网络层的<strong>区别</strong>：</p>
 <ul>
-<li>网络层是为不同主机提供通信服务，而传输层是为不同主机的不同应用程序提供通信服务。</li>
+<li>网络层是为<strong>不同主机</strong>提供通信服务，而传输层是为<strong>不同主机的不同应用程序</strong>提供通信服务。</li>
 <li>网络层只对报文头部进行差错检测，而传输层对整个报文进行差错检测。</li>
 </ul>
 <h2 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h2><h3 id="UDP-的特点"><a href="#UDP-的特点" class="headerlink" title="UDP 的特点"></a>UDP 的特点</h3><p>UDP（User Datagram Protocol, 用户数据报协议）有以下特点：</p>
@@ -464,11 +464,11 @@
 <li>可靠<br>TCP 发送的数据无重复、无丢失、与发送端顺序一致。</li>
 <li>面向字节流<br>TCP 以字节位单位，传输的过程中数据被划分成一个个数据报。</li>
 <li>全双工通信<br>TCP 的两端既可以作为发送端，也可以作为接收端。</li>
-<li>一条 TCP 连接的两端只能有两个端点<br>TCP 只能提供点到点的通信，而 UDP 可以任意方式的通信。一条 TCP 连接的两端就是两个套接字，套接字 = IP:端口号。</li>
+<li>一条 TCP 连接的两端只能有两个端点<br>TCP 只能提供点到点的通信，而 UDP 可以任意方式的通信。一条 TCP 连接的两端就是两个套接字，套接字 = IP: 端口号。</li>
 </ul>
 <h3 id="TCP-头部"><a href="#TCP-头部" class="headerlink" title="TCP 头部"></a>TCP 头部</h3><p>TCP 头部通常有 20 字节，有选项时更长，但总共不超过 60 字节。包括：</p>
 <ul>
-<li>源端口、目的端口（共 4 字节）<br>传输层和网络层的一大重要区别就是传输层指定了数据报发往的应用进程，因此需要端口号标识。</li>
+<li>源端口、目的端口（共 4 字节）<br>传输层和网络层的一大重要区别就是：传输层指定了数据报发往的应用进程，因此需要端口号标识。</li>
 <li>序号（4 字节）<br>当前 TCP 数据报数据部分的第一个字节的序号。<br>TCP 是面向字节流的，它会对发送的每一个字节进行编号，而且不同数据报之间是连续编号的。</li>
 <li>确认号（4 字节）<br>表示当前主机作为接收端，期望接收的下一个字节的编号。</li>
 <li>数据偏移（4 字节）<br>数据部分距离报文段起始部分的偏移，其实就是头部的长度。</li>
@@ -505,9 +505,9 @@
 <li>当 B 不再需要连接时，向 A 发送连接释放的请求报文， FIN=1，之后 B 进入<code>LAST-ACK</code>状态。</li>
 <li>A 收到释放请求后，向 B 发送应答，进入<code>TIME-WAIT</code>状态，等待 2MSL 后进入<code>CLOSED</code>状态，B 收到应答后，也进入<code>CLOSED</code>状态。</li>
 </ul>
-<p>为什么 A 要先进入<code>TIME-WAIT</code>状态，<strong>等待 2MSL 时间</strong>后再进入<code>CLOSED</code>状态？<br>其实是为了保证 B 能收到 A 的确认应答。<br>若 A 发完确认应答后直接<code>CLOSED</code>，如果该应答丢失，B 等待超时，会重新发送释放连接的请求，此时 A 已经关闭了，不会作出任何响应，B 永远无法正常关闭。</p>
+<p>为什么 A 要先进入<code>TIME-WAIT</code>状态，<strong>等待 2MSL 时间</strong>后再进入<code>CLOSED</code>状态？<br>其实是<strong>为了保证 B 能收到 A 的确认应答</strong>。<br>若 A 发完确认应答后直接<code>CLOSED</code>，如果该应答丢失，B 等待超时，会重新发送释放连接的请求，此时 A 已经关闭了，不会作出任何响应，B 永远无法正常关闭。</p>
 <h3 id="TCP-可靠传输的表现"><a href="#TCP-可靠传输的表现" class="headerlink" title="TCP 可靠传输的表现"></a>TCP 可靠传输的表现</h3><p>TCP 的可靠性在于，它向应用层提供的数据是无差错、有序、无丢失的。<br>TCP 采用<strong>流量控制</strong>、<strong>拥塞控制</strong>、<strong>连续 ARQ</strong> 等技术保证它的可靠性。</p>
-<h3 id="停止等待协议（ARQ-协议）"><a href="#停止等待协议（ARQ-协议）" class="headerlink" title="停止等待协议（ARQ 协议）"></a>停止等待协议（ARQ 协议）</h3><p>TCP 保证其可靠性采用的是更为复杂的滑动窗口协议，但停止等待协议是它的简化版，因此这里先介绍停止等待协议。<br>ARQ（Automatic Repeat reQuest, 自动重传请求），就是当请求失败时它会自动重传，直到请求被正确接收为止。</p>
+<h3 id="停止等待协议（ARQ-协议）"><a href="#停止等待协议（ARQ-协议）" class="headerlink" title="停止等待协议（ARQ 协议）"></a>停止等待协议（ARQ 协议）</h3><p>TCP 保证其可靠性采用的是更为复杂的<strong>滑动窗口协议</strong>，但停止等待协议是它的简化版，因此这里先介绍停止等待协议。<br>ARQ（Automatic Repeat reQuest, 自动重传请求），就是当请求失败时它会自动重传，直到请求被正确接收为止。</p>
 <ul>
 <li>无差错的情况<br>A 向 B 每发送一个分组，都要停止发送，收到 B 的确认应答后才发送下一个分组。</li>
 <li>分组丢失、出现差错的情况<br><strong>分组丢失</strong>：分组在途中丢失，B 收不到，因此不会有响应，A 超时后会重传。<br><strong>出现差错</strong>：B 收到分组，但检查到分组有差错，会直接丢弃，不会有响应，A 同样超时重传。</li>
