@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/06/30/application-layer/</loc>
+    <lastmod>2018-06-30T08:47:04.367Z</lastmod>
+    <data>
+        <display>
+        <title>计算机网络——应用层</title>
+        <pubTime>2018-06-30T08:38:11.000Z</pubTime>
+        
+        <tag>http</tag>
+         
+        <tag>https</tag>
+         
+         
+           
+             
+              <breadCrumb title="Network" url="https://yanglbme.github.io/categories/Network/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/06/29/transport-layer/</loc>
-    <lastmod>2018-06-30T02:53:51.657Z</lastmod>
+    <lastmod>2018-06-30T08:29:23.676Z</lastmod>
     <data>
         <display>
         <title>计算机网络——传输层</title>
