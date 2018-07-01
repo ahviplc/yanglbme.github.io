@@ -4,16 +4,36 @@
 
     
   <url>
-    <loc>https://yanglbme.github.io/2018/06/30/application-layer/</loc>
-    <lastmod>2018-06-30T08:47:04.367Z</lastmod>
+    <loc>https://yanglbme.github.io/2018/07/01/all-os/</loc>
+    <lastmod>2018-07-01T15:27:40.408Z</lastmod>
     <data>
         <display>
-        <title>计算机网络——应用层</title>
-        <pubTime>2018-06-30T08:38:11.000Z</pubTime>
+        <title>操作系统知识总结</title>
+        <pubTime>2018-07-01T15:16:41.000Z</pubTime>
         
-        <tag>http</tag>
+        <tag>os</tag>
          
-        <tag>https</tag>
+         
+           
+             
+              <breadCrumb title="Dev" url="https://yanglbme.github.io/categories/Dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yanglbme.github.io/2018/06/29/transport-layer/</loc>
+    <lastmod>2018-06-30T11:52:13.109Z</lastmod>
+    <data>
+        <display>
+        <title>计算机网络——传输层</title>
+        <pubTime>2018-06-29T10:32:22.000Z</pubTime>
+        
+        <tag>UDP</tag>
+         
+        <tag>TCP</tag>
          
          
            
@@ -26,16 +46,16 @@
 
     
   <url>
-    <loc>https://yanglbme.github.io/2018/06/29/transport-layer/</loc>
-    <lastmod>2018-06-30T08:29:23.676Z</lastmod>
+    <loc>https://yanglbme.github.io/2018/06/30/application-layer/</loc>
+    <lastmod>2018-06-30T08:47:04.367Z</lastmod>
     <data>
         <display>
-        <title>计算机网络——传输层</title>
-        <pubTime>2018-06-29T10:32:22.000Z</pubTime>
+        <title>计算机网络——应用层</title>
+        <pubTime>2018-06-30T08:38:11.000Z</pubTime>
         
-        <tag>UDP</tag>
+        <tag>http</tag>
          
-        <tag>TCP</tag>
+        <tag>https</tag>
          
          
            
