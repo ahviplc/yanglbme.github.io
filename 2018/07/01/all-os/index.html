@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="操作系统的四个特性 并发同一段时间内多个程序并发执行。 共享系统中的资源可以被内存中多个并发执行的进线程共同使用。 虚拟通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。 异步系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。  操作系统的主要功能 处理机管理：进程控制、进程同步、进程通信、">
+<meta name="description" content="操作系统的四个特性 并发同一段时间内多个程序并发执行。 共享系统中的资源可以被内存中多个并发执行的进线程共同使用。 虚拟通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。 异步系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。">
 <meta name="keywords" content="os">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统知识总结">
 <meta property="og:url" content="https://yanglbme.github.io/2018/07/01/all-os/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="操作系统的四个特性 并发同一段时间内多个程序并发执行。 共享系统中的资源可以被内存中多个并发执行的进线程共同使用。 虚拟通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。 异步系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。  操作系统的主要功能 处理机管理：进程控制、进程同步、进程通信、">
+<meta property="og:description" content="操作系统的四个特性 并发同一段时间内多个程序并发执行。 共享系统中的资源可以被内存中多个并发执行的进线程共同使用。 虚拟通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。 异步系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-02T15:21:00.047Z">
+<meta property="og:updated_time" content="2018-07-02T15:49:12.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结">
-<meta name="twitter:description" content="操作系统的四个特性 并发同一段时间内多个程序并发执行。 共享系统中的资源可以被内存中多个并发执行的进线程共同使用。 虚拟通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。 异步系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。  操作系统的主要功能 处理机管理：进程控制、进程同步、进程通信、">
+<meta name="twitter:description" content="操作系统的四个特性 并发同一段时间内多个程序并发执行。 共享系统中的资源可以被内存中多个并发执行的进线程共同使用。 虚拟通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。 异步系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。">
 
 
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  235 word(s)
+                  360 word(s)
                 </span>
               
 
@@ -427,9 +427,10 @@
         <h2 id="操作系统的四个特性"><a href="#操作系统的四个特性" class="headerlink" title="操作系统的四个特性"></a>操作系统的四个特性</h2><ul>
 <li>并发<br>同一段时间内多个程序并发执行。</li>
 <li>共享<br>系统中的资源可以被内存中多个并发执行的进线程共同使用。</li>
-<li>虚拟<br>通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现把一个物理实体虚拟为若干个逻辑上的对应物。</li>
+<li>虚拟<br>通过时分复用（eg. 分时系统）以及空分复用（eg. 虚拟内存）技术实现<strong>把一个物理实体虚拟为若干个逻辑上的对应物</strong>。</li>
 <li>异步<br>系统中的进程以人们不可预知的速度向前推进，但只要运行环境相同，多次运行都会获得完全相同的结果。</li>
 </ul>
+<a id="more"></a>
 <h2 id="操作系统的主要功能"><a href="#操作系统的主要功能" class="headerlink" title="操作系统的主要功能"></a>操作系统的主要功能</h2><ul>
 <li>处理机管理：进程控制、进程同步、进程通信、CPU 调度</li>
 <li>存储器管理：内存分配、地址映射</li>
@@ -437,6 +438,17 @@
 <li>文件管理：存储空间管理、目录管理</li>
 <li>用户接口：图形接口、命令接口</li>
 </ul>
+<h2 id="程序顺序执行的特征"><a href="#程序顺序执行的特征" class="headerlink" title="程序顺序执行的特征"></a>程序顺序执行的特征</h2><ul>
+<li>顺序性：下一操作要等待前一操作执行结束。</li>
+<li>封闭性：执行独占资源，不受外界影响。</li>
+<li>可再现性：重复执行得到相同结果。</li>
+</ul>
+<h2 id="程序并发执行的特征"><a href="#程序并发执行的特征" class="headerlink" title="程序并发执行的特征"></a>程序并发执行的特征</h2><ul>
+<li>间断性</li>
+<li>失去封闭性 </li>
+<li>不可再现性：重复执行可引发多种结果。</li>
+</ul>
+<p>程序并发的三个特征使得程序不能并发地正确执行，为了保证程序并发执行，引入进程。</p>
 
       
     </div>
@@ -634,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的四个特性"><span class="nav-number">1.</span> <span class="nav-text">操作系统的四个特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">2.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的四个特性"><span class="nav-number">1.</span> <span class="nav-text">操作系统的四个特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">2.</span> <span class="nav-text">操作系统的主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">3.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">4.</span> <span class="nav-text">程序并发执行的特征</span></a></li></ol></div>
             
 
           </div>
