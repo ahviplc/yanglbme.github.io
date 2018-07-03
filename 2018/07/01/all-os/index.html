@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/process-status.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pcb-link.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pcb-index.png">
-<meta property="og:updated_time" content="2018-07-03T09:26:03.805Z">
+<meta property="og:updated_time" content="2018-07-03T11:39:44.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结">
 <meta name="twitter:description" content="操作系统概论操作系统的作用 作为用户与计算机硬件系统之间的接口。 作为计算机系统资源的管理者。 实现对计算机资源的抽象。  操作系统的四个基本特性">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,995 word(s)
+                  2,325 word(s)
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  7 min(s)
+                  8 min(s)
                 </span>
               
             </div>
@@ -544,8 +544,8 @@
 <li>检查该进程的现行状态，静止就绪改为活动就绪；静止阻塞改为活动阻塞；</li>
 <li>若是进入就绪队列，则重新调度，抢占式和非抢占式调度。</li>
 </ol>
-<h2 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h2><p>进程同步的任务是使并发执行的诸进程之间能有效地共享资源和相互合作，从而使进程的执行具有可再见性。</p>
-<h3 id="同步机制应遵循的规则"><a href="#同步机制应遵循的规则" class="headerlink" title="同步机制应遵循的规则"></a>同步机制应遵循的规则</h3><ul>
+<h2 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h2><p>进程同步的任务是使并发执行的诸进程之间能有效地共享资源和相互合作，从而使进程的执行具有可再见性。<br>同步机制应遵循的规则：</p>
+<ul>
 <li>空闲让进</li>
 <li>忙则等待</li>
 <li>有限等待</li>
@@ -556,6 +556,37 @@
 <li>记录型信号量<br><strong>增加一个进程链表 L</strong>，用于链接所有等待进程。<br>初始值为 1，表示只允许一个进程访问临界资源，此时的信号量转换为互斥信号量。</li>
 <li>AND 型信号量<br>将进程在整个运行过程中需要的所有资源，一次分配给进程，待进程使用完后再一起释放。即：要么全部分配到进程，要么一个也不分配。</li>
 </ul>
+<h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><p>管程是一种<strong>共享数据结构</strong>，对该共享数据结构实施的特定操作定义为<strong>一组过程</strong>。进程对共享资源的申请、释放和其他操作必须通过这组过程。</p>
+<ul>
+<li>局部数据变量<strong>只能被管程的过程访问</strong>，任何外部过程都不能访问。</li>
+<li>一个进程通过调用管程的一个过程进入管程。</li>
+<li>在任何时候，只能有一个进程在管程中执行，调用管程的任何其它进程都被阻塞。</li>
+</ul>
+<h3 id="生产者——消费者问题"><a href="#生产者——消费者问题" class="headerlink" title="生产者——消费者问题"></a>生产者——消费者问题</h3><p>可以利用“记录型信号量、AND 型信号量、管程”来解决生产者——消费者问题，这里演记录型信号量的使用。<br>假设有<code>n</code>个缓冲区。</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>功能/描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mutex</td>
+<td><strong>实现</strong>诸进程对缓冲区的<strong>互斥</strong>访问（公有）</td>
+</tr>
+<tr>
+<td>empty</td>
+<td>缓冲池中<strong>空缓冲区的数量</strong>（私有）</td>
+</tr>
+<tr>
+<td>full</td>
+<td>缓冲池中<strong>满缓冲区的数量</strong>（私有）</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生产者</span></span><br><span class="line">producer:begin</span><br><span class="line">    repeat</span><br><span class="line">        produce an item nextp;</span><br><span class="line">        wait(empty); <span class="comment">// 先私</span></span><br><span class="line">        wait(mutex); <span class="comment">// 后公</span></span><br><span class="line">        buffer(<span class="keyword">in</span>) ∶= nextp;</span><br><span class="line">        <span class="keyword">in</span> ∶= (<span class="keyword">in</span> + <span class="number">1</span>) mod n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">        until <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 消费者</span></span><br><span class="line">consumer:begin</span><br><span class="line">    repeat</span><br><span class="line">        wait(full); <span class="comment">// 先私</span></span><br><span class="line">        wait(mutex); <span class="comment">// 后公</span></span><br><span class="line">        nextc ∶= buffer(out);</span><br><span class="line">        out∶ = (out + <span class="number">1</span>) mod n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">        consumer the item <span class="keyword">in</span> nextc;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -753,7 +784,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概论"><span class="nav-number">1.</span> <span class="nav-text">操作系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的四个基本特性"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的四个基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">2.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">2.1.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">2.2.</span> <span class="nav-text">程序并发执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的四个特性"><span class="nav-number">2.4.</span> <span class="nav-text">进程的四个特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">2.5.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">2.6.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的作用"><span class="nav-number">2.7.</span> <span class="nav-text">PCB 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的组织方式"><span class="nav-number">2.8.</span> <span class="nav-text">PCB 的组织方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原语操作"><span class="nav-number">2.9.</span> <span class="nav-text">原语操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建"><span class="nav-number">3.1.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程终止"><span class="nav-number">3.2.</span> <span class="nav-text">进程终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞（对应唤醒）"><span class="nav-number">3.3.</span> <span class="nav-text">进程阻塞（对应唤醒）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程唤醒"><span class="nav-number">3.4.</span> <span class="nav-text">进程唤醒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程挂起（对应激活）"><span class="nav-number">3.5.</span> <span class="nav-text">进程挂起（对应激活）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程激活"><span class="nav-number">3.6.</span> <span class="nav-text">进程激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程同步"><span class="nav-number">4.</span> <span class="nav-text">进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步机制应遵循的规则"><span class="nav-number">4.1.</span> <span class="nav-text">同步机制应遵循的规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量机制"><span class="nav-number">4.2.</span> <span class="nav-text">信号量机制</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概论"><span class="nav-number">1.</span> <span class="nav-text">操作系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的四个基本特性"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的四个基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">2.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">2.1.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">2.2.</span> <span class="nav-text">程序并发执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的四个特性"><span class="nav-number">2.4.</span> <span class="nav-text">进程的四个特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">2.5.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">2.6.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的作用"><span class="nav-number">2.7.</span> <span class="nav-text">PCB 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的组织方式"><span class="nav-number">2.8.</span> <span class="nav-text">PCB 的组织方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原语操作"><span class="nav-number">2.9.</span> <span class="nav-text">原语操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建"><span class="nav-number">3.1.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程终止"><span class="nav-number">3.2.</span> <span class="nav-text">进程终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞（对应唤醒）"><span class="nav-number">3.3.</span> <span class="nav-text">进程阻塞（对应唤醒）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程唤醒"><span class="nav-number">3.4.</span> <span class="nav-text">进程唤醒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程挂起（对应激活）"><span class="nav-number">3.5.</span> <span class="nav-text">进程挂起（对应激活）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程激活"><span class="nav-number">3.6.</span> <span class="nav-text">进程激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程同步"><span class="nav-number">4.</span> <span class="nav-text">进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量机制"><span class="nav-number">4.1.</span> <span class="nav-text">信号量机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管程"><span class="nav-number">4.2.</span> <span class="nav-text">管程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者——消费者问题"><span class="nav-number">4.3.</span> <span class="nav-text">生产者——消费者问题</span></a></li></ol></li></ol></div>
             
 
           </div>
