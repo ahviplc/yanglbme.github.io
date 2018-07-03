@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/process-status.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pcb-link.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pcb-index.png">
-<meta property="og:updated_time" content="2018-07-03T07:21:40.595Z">
+<meta property="og:updated_time" content="2018-07-03T08:12:51.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结">
 <meta name="twitter:description" content="操作系统概论操作系统的作用 作为用户与计算机硬件系统之间的接口。 作为计算机系统资源的管理者。 实现对计算机资源的抽象。  操作系统的四个基本特性">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  919 word(s)
+                  1,636 word(s)
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3 min(s)
+                  6 min(s)
                 </span>
               
             </div>
@@ -447,7 +447,7 @@
 <li>文件管理：存储空间管理、目录管理</li>
 <li>用户接口：图形接口、命令接口</li>
 </ul>
-<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h3 id="程序顺序执行的特征"><a href="#程序顺序执行的特征" class="headerlink" title="程序顺序执行的特征"></a>程序顺序执行的特征</h3><ul>
+<h2 id="进程基本概念"><a href="#进程基本概念" class="headerlink" title="进程基本概念"></a>进程基本概念</h2><h3 id="程序顺序执行的特征"><a href="#程序顺序执行的特征" class="headerlink" title="程序顺序执行的特征"></a>程序顺序执行的特征</h3><ul>
 <li>顺序性：下一操作要等待前一操作执行结束。</li>
 <li>封闭性：执行独占资源，不受外界影响。</li>
 <li>可再现性：重复执行得到相同结果。</li>
@@ -494,6 +494,49 @@
 <li><strong>链接方式</strong>：把具有相同状态的进程的 PCB 分别通过 PCB 中的链接字段链接成一个队列。优先级高的进程 PCB 排在队列前面。<br><img src="http://p9ucdlghd.bkt.clouddn.com/pcb-link.png" alt="pcb-link"></li>
 <li><strong>索引方式</strong>：根据进程状态的不同建立索引。<br><img src="http://p9ucdlghd.bkt.clouddn.com/pcb-index.png" alt="pcb-index"></li>
 </ul>
+<h3 id="原语操作"><a href="#原语操作" class="headerlink" title="原语操作"></a>原语操作</h3><p><strong>原语</strong>由若干指令组成，是用于完成一定功能的一个过程。<br>原语操作是一种原子操作；原语中的操作要么全做，要么全不做。</p>
+<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><h3 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h3><ol>
+<li>申请空白 PCB；</li>
+<li>为新进程分配资源；</li>
+<li>初始化 PCB；</li>
+<li>如果进程就绪队列能够接纳新进程，就将新进程插入就绪队列。</li>
+</ol>
+<h3 id="进程终止"><a href="#进程终止" class="headerlink" title="进程终止"></a>进程终止</h3><ol>
+<li>根据标识符从 PCB 集合中检索出 PCB，读取进程状态；</li>
+<li>若正处于执行状态，立即终止该进程的执行，并<strong>置调度标志位真</strong>，在进程被终止后重新调度；</li>
+<li>终止该进程的子孙进程，以防止成为不可控的进程；</li>
+<li>回收资源，归还给父进程/系统；</li>
+<li>PCB 移出所在队列或链表。</li>
+</ol>
+<h3 id="进程阻塞（对应唤醒）"><a href="#进程阻塞（对应唤醒）" class="headerlink" title="进程阻塞（对应唤醒）"></a>进程阻塞（对应唤醒）</h3><p>执行过程中，当发现引发阻塞的事件而无法继续执行时，进程调用阻塞原语<code>block</code>把自己阻塞。</p>
+<ol>
+<li>停止当前执行；</li>
+<li>修改状态，由执行改为阻塞；</li>
+<li>将 PCB 插入阻塞队列，若有因不同事件而划分的多个阻塞队列，阻塞进程插入相应队列；</li>
+<li>重新调度，将处理机分配给另一就绪进程；</li>
+<li>CPU 环境切换，保存被阻塞进程的 CPU 状态到 PCB 中，按新进程 PCB 的 CPU 状态设置 CPU 新环境。</li>
+</ol>
+<h3 id="进程唤醒"><a href="#进程唤醒" class="headerlink" title="进程唤醒"></a>进程唤醒</h3><p>被阻塞的事件已满足，如 I/O 完成或所需数据已到达，则由有关进程调用唤醒原语<code>wakeup</code>，将阻塞的进程唤醒：</p>
+<ol>
+<li>先把被阻塞的进程从等待该事件的阻塞队列中移出；</li>
+<li>将其 PCB 状态由阻塞改为就绪；</li>
+<li>再将该 PCB 插入到就绪队列中。</li>
+</ol>
+<h3 id="进程挂起（对应激活）"><a href="#进程挂起（对应激活）" class="headerlink" title="进程挂起（对应激活）"></a>进程挂起（对应激活）</h3><p>挂起是将<strong>活动状态</strong>改为<strong>静止状态</strong>的过程。</p>
+<p>挂起一般有以下几个原因：</p>
+<ul>
+<li>终端用户的请求：当终端用户发现自己程序运行期间有可疑进程时，需要挂起检查。</li>
+<li>父进程的请求：有时父进程希望挂起自己的某个子进程，以便考察和修改子进程，或者协调各子进程间的活动。</li>
+<li>负载调节的需要：保证系统正常运行。</li>
+<li>操作系统的需要：操作系统有时希望挂起某些进程，以便检查运行中的资源使用情况。</li>
+</ul>
+<p>挂起原语的执行过程如下：</p>
+<ol>
+<li>检查被挂起进程的状态，活动就绪改为静止就绪；活动阻塞改为静止阻塞；</li>
+<li>将 PCB 复制到指定的内存区域；</li>
+<li>数据复制到外存，释放内存；</li>
+<li>若被挂起的进程正在执行，则重新调度。</li>
+</ol>
 
       
     </div>
@@ -691,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概论"><span class="nav-number">1.</span> <span class="nav-text">操作系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的四个基本特性"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的四个基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程管理"><span class="nav-number">2.</span> <span class="nav-text">进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">2.1.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">2.2.</span> <span class="nav-text">程序并发执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的四个特性"><span class="nav-number">2.4.</span> <span class="nav-text">进程的四个特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">2.5.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">2.6.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的作用"><span class="nav-number">2.7.</span> <span class="nav-text">PCB 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的组织方式"><span class="nav-number">2.8.</span> <span class="nav-text">PCB 的组织方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概论"><span class="nav-number">1.</span> <span class="nav-text">操作系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的四个基本特性"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的四个基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">2.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">2.1.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">2.2.</span> <span class="nav-text">程序并发执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的四个特性"><span class="nav-number">2.4.</span> <span class="nav-text">进程的四个特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">2.5.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">2.6.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的作用"><span class="nav-number">2.7.</span> <span class="nav-text">PCB 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的组织方式"><span class="nav-number">2.8.</span> <span class="nav-text">PCB 的组织方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原语操作"><span class="nav-number">2.9.</span> <span class="nav-text">原语操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建"><span class="nav-number">3.1.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程终止"><span class="nav-number">3.2.</span> <span class="nav-text">进程终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞（对应唤醒）"><span class="nav-number">3.3.</span> <span class="nav-text">进程阻塞（对应唤醒）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程唤醒"><span class="nav-number">3.4.</span> <span class="nav-text">进程唤醒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程挂起（对应激活）"><span class="nav-number">3.5.</span> <span class="nav-text">进程挂起（对应激活）</span></a></li></ol></li></ol></div>
             
 
           </div>
