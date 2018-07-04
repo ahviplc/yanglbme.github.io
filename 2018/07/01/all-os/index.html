@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pcb-link.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pcb-index.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pipe.png">
-<meta property="og:updated_time" content="2018-07-03T13:33:34.478Z">
+<meta property="og:updated_time" content="2018-07-04T02:32:20.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结">
 <meta name="twitter:description" content="操作系统概论操作系统的作用 作为用户与计算机硬件系统之间的接口。 作为计算机系统资源的管理者。 实现对计算机资源的抽象。  操作系统的四个基本特性">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3,097 word(s)
+                  3,370 word(s)
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  11 min(s)
+                  12 min(s)
                 </span>
               
             </div>
@@ -587,7 +587,7 @@
 </tbody>
 </table>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生产者</span></span><br><span class="line">producer:begin</span><br><span class="line">    repeat</span><br><span class="line">        produce an item nextp;</span><br><span class="line">        wait(empty); <span class="comment">// 先私</span></span><br><span class="line">        wait(mutex); <span class="comment">// 后公</span></span><br><span class="line">        buffer(<span class="keyword">in</span>) ∶= nextp;</span><br><span class="line">        <span class="keyword">in</span> ∶= (<span class="keyword">in</span> + <span class="number">1</span>) mod n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">        until <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 消费者</span></span><br><span class="line">consumer:begin</span><br><span class="line">    repeat</span><br><span class="line">        wait(full); <span class="comment">// 先私</span></span><br><span class="line">        wait(mutex); <span class="comment">// 后公</span></span><br><span class="line">        nextc ∶= buffer(out);</span><br><span class="line">        out∶ = (out + <span class="number">1</span>) mod n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">        consume the item <span class="keyword">in</span> nextc;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 消费者</span></span><br><span class="line">consumer:begin</span><br><span class="line">    repeat</span><br><span class="line">        wait(full); <span class="comment">// 先私</span></span><br><span class="line">        wait(mutex); <span class="comment">// 后公</span></span><br><span class="line">        nextc ∶= buffer(out);</span><br><span class="line">        out ∶= (out + <span class="number">1</span>) mod n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">        consume the item <span class="keyword">in</span> nextc;</span><br></pre></td></tr></table></figure>
 <h3 id="哲学家进餐问题"><a href="#哲学家进餐问题" class="headerlink" title="哲学家进餐问题"></a>哲学家进餐问题</h3><p>五个哲学家进餐，如何<strong>避免死锁</strong>？</p>
 <ul>
 <li>至多只允许有四位哲学家同时去拿左边的筷子</li>
@@ -603,12 +603,11 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rmutex, <span class="attr">wmutex</span>:semaphore = <span class="number">1</span>, <span class="number">1</span>;</span><br><span class="line">    readcount:integer = <span class="number">0</span>;</span><br><span class="line">    begin</span><br><span class="line">    parbegin</span><br><span class="line">    reader:begin</span><br><span class="line">        repeat</span><br><span class="line">            wait(rmutex);</span><br><span class="line">            <span class="keyword">if</span> readcount = <span class="number">0</span> then wait(wmutex);</span><br><span class="line">            readcount ∶= readcount + <span class="number">1</span>;</span><br><span class="line">            signal(rmutex);</span><br><span class="line">            perform read operation;</span><br><span class="line"></span><br><span class="line">            wait(rmutex);</span><br><span class="line">            readcount = readcount - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> readcount = <span class="number">0</span> then signal(wmutex);</span><br><span class="line">            signal(rmutex);</span><br><span class="line">        until <span class="literal">false</span>;</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">    writer:begin</span><br><span class="line">        repeat</span><br><span class="line">            wait(wmutex);</span><br><span class="line">            perform write operation;</span><br><span class="line">            signal(wmutex);</span><br><span class="line">        until <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h2><p>进程间通信（IPC, InterProcess Communication）是指在不同进程之间传播或交换信息。</p>
-<p>常见的通信方式有：</p>
-<ul>
+<h3 id="进程通信方式"><a href="#进程通信方式" class="headerlink" title="进程通信方式"></a>进程通信方式</h3><ul>
 <li>共享内存（最快）<br>同一块物理内存<strong>被映射到</strong>进程 A、进程 B 各自的进程空间。进程 A 可以即时看到进程 B 对共享内存中数据的更新，反之亦然。<br>由于多个进程共享同一块内存区域，必然需要使用<strong>同步机制</strong>，互斥锁和信号量都可以。</li>
 <li>管道<br>管道是指用于连接一个读进程和一个写进程以实现它们之间通信的一个<strong>共享文件</strong>，又叫<code>pipe</code>文件。<br><strong>写进程</strong>：以字符流形式将大量的数据送入共享文件，即送入管道。<br><strong>读进程</strong>：从管道中接收数据，即从共享文件中读数据。<br>管道只支持<strong>半双工通信</strong>（单向传输）；<strong>只能在父子进程中使用</strong>；管道实质是采用文件的读写操作，支持大数据量的传输。<br><img src="http://p9ucdlghd.bkt.clouddn.com/pipe.png" alt="pipe"></li>
 <li>命名管道<br>即 FIFO 文件，通过命名管道可以实现<strong>在不相关的进程之间交换数据</strong>。</li>
-<li>消息队列<br>消息队列提供了一种从一个进程向另一个进程发送一个数据块的方法。每个数据块都被认为含有一个类型，接收进程可以独立地接收含有不同类型的数据结构。<br>相比于 FIFO，<strong>消息队列具有以下优点</strong>：<ul>
+<li>消息队列<br>消息队列提供了一种<strong>从一个进程向另一个进程发送一个数据块</strong>的方法。每个数据块都被认为含有一个类型，接收进程可以独立地接收含有不同类型的数据结构。<br>相比于 FIFO，<strong>消息队列具有以下优点</strong>：<ul>
 <li>消息队列可以独立于读写进程存在，从而避免了 FIFO 中同步管道的打开和关闭时可能产生的困难；</li>
 <li>避免了 FIFO 的同步阻塞问题，<strong>不需要进程自己提供同步方法</strong>；</li>
 <li>读进程可以<strong>根据消息类型有选择地接收消息</strong>，而不像 FIFO 那样只能默认地接收。</li>
@@ -616,8 +615,14 @@
 </li>
 <li>套接字<br>与其它通信机制不同的是，它可用于不同机器间的进程通信。</li>
 </ul>
-<hr>
-<p>未完待续…</p>
+<h3 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h3><ul>
+<li>地址空间<br>进程之间是独立的地址空间，而同一进程的线程则共享本进程的地址空间。</li>
+<li>资源拥有<br>进程之间的资源是独立的，而同一进程内的线程共享本进程的资源，如内存、I/O、CPU 等。<br>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃后整个进程都死掉。所以多进程要比多线程健壮。</li>
+<li>执行过程<br>每个独立的进程有一个程序运行的入口、顺序执行序列和程序入口，而线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</li>
+<li>线程是处理机调度的基本单位，但是进程不是。</li>
+</ul>
+<p>因此，<br>对资源的管理和保护要求高，不限制开销和效率时，使用多进程。<br>要求效率高、频繁切换、资源的保护管理要求不是很高时，使用多线程。</p>
+<p><a href="https://yanglbme.github.io/all-os2">未完，续 2</a>。</p>
 
       
     </div>
@@ -657,6 +662,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/04/all-os2/" rel="prev" title="操作系统知识总结2">
+                操作系统知识总结2 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -734,7 +743,7 @@
                 alt="Bingo" />
             
               <p class="site-author-name" itemprop="name">Bingo</p>
-              <p class="site-description motion-element" itemprop="description">Bingo's personal blog</p>
+              <p class="site-description motion-element" itemprop="description">A Web Developer, major in Java.</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -744,7 +753,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -815,7 +824,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概论"><span class="nav-number">1.</span> <span class="nav-text">操作系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的四个基本特性"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的四个基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">2.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">2.1.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">2.2.</span> <span class="nav-text">程序并发执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的四个特性"><span class="nav-number">2.4.</span> <span class="nav-text">进程的四个特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">2.5.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">2.6.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的作用"><span class="nav-number">2.7.</span> <span class="nav-text">PCB 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的组织方式"><span class="nav-number">2.8.</span> <span class="nav-text">PCB 的组织方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原语操作"><span class="nav-number">2.9.</span> <span class="nav-text">原语操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建"><span class="nav-number">3.1.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程终止"><span class="nav-number">3.2.</span> <span class="nav-text">进程终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞（对应唤醒）"><span class="nav-number">3.3.</span> <span class="nav-text">进程阻塞（对应唤醒）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程唤醒"><span class="nav-number">3.4.</span> <span class="nav-text">进程唤醒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程挂起（对应激活）"><span class="nav-number">3.5.</span> <span class="nav-text">进程挂起（对应激活）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程激活"><span class="nav-number">3.6.</span> <span class="nav-text">进程激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程同步"><span class="nav-number">4.</span> <span class="nav-text">进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量机制"><span class="nav-number">4.1.</span> <span class="nav-text">信号量机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管程"><span class="nav-number">4.2.</span> <span class="nav-text">管程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者——消费者问题"><span class="nav-number">4.3.</span> <span class="nav-text">生产者——消费者问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哲学家进餐问题"><span class="nav-number">4.4.</span> <span class="nav-text">哲学家进餐问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读者——写者问题"><span class="nav-number">4.5.</span> <span class="nav-text">读者——写者问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">5.</span> <span class="nav-text">进程通信</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统概论"><span class="nav-number">1.</span> <span class="nav-text">操作系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的作用"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的四个基本特性"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统的四个基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统的主要功能"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程基本概念"><span class="nav-number">2.</span> <span class="nav-text">进程基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序顺序执行的特征"><span class="nav-number">2.1.</span> <span class="nav-text">程序顺序执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序并发执行的特征"><span class="nav-number">2.2.</span> <span class="nav-text">程序并发执行的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的四个特性"><span class="nav-number">2.4.</span> <span class="nav-text">进程的四个特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与程序的区别"><span class="nav-number">2.5.</span> <span class="nav-text">进程与程序的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的三种基本状态"><span class="nav-number">2.6.</span> <span class="nav-text">进程的三种基本状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的作用"><span class="nav-number">2.7.</span> <span class="nav-text">PCB 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-的组织方式"><span class="nav-number">2.8.</span> <span class="nav-text">PCB 的组织方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原语操作"><span class="nav-number">2.9.</span> <span class="nav-text">原语操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建"><span class="nav-number">3.1.</span> <span class="nav-text">进程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程终止"><span class="nav-number">3.2.</span> <span class="nav-text">进程终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程阻塞（对应唤醒）"><span class="nav-number">3.3.</span> <span class="nav-text">进程阻塞（对应唤醒）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程唤醒"><span class="nav-number">3.4.</span> <span class="nav-text">进程唤醒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程挂起（对应激活）"><span class="nav-number">3.5.</span> <span class="nav-text">进程挂起（对应激活）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程激活"><span class="nav-number">3.6.</span> <span class="nav-text">进程激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程同步"><span class="nav-number">4.</span> <span class="nav-text">进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量机制"><span class="nav-number">4.1.</span> <span class="nav-text">信号量机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管程"><span class="nav-number">4.2.</span> <span class="nav-text">管程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者——消费者问题"><span class="nav-number">4.3.</span> <span class="nav-text">生产者——消费者问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哲学家进餐问题"><span class="nav-number">4.4.</span> <span class="nav-text">哲学家进餐问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读者——写者问题"><span class="nav-number">4.5.</span> <span class="nav-text">读者——写者问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信"><span class="nav-number">5.</span> <span class="nav-text">进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程通信方式"><span class="nav-number">5.1.</span> <span class="nav-text">进程通信方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程的区别"><span class="nav-number">5.2.</span> <span class="nav-text">进程与线程的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
