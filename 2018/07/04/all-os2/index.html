@@ -98,7 +98,8 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/first-come-first-served.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/short-job-first.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/multilevel-feedback-queue.png">
-<meta property="og:updated_time" content="2018-07-04T08:10:03.822Z">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/banker-algorithm.png">
+<meta property="og:updated_time" content="2018-07-04T11:14:28.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结2">
 <meta name="twitter:description" content="处理机调度处理机调度的层次 高级调度（作业调度）根据调度算法和计算机状态，从外存选择一个或多个作业调度内存。 创建进程 分配内存等资源 将进程放入就绪队列等待 CPU 调度。">
@@ -392,7 +393,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,091 word(s)
+                  2,184 word(s)
                 </span>
               
 
@@ -408,7 +409,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 min(s)
+                  7 min(s)
                 </span>
               
             </div>
@@ -478,6 +479,76 @@
 </ul>
 </li>
 </ul>
+<h3 id="实时调度"><a href="#实时调度" class="headerlink" title="实时调度"></a>实时调度</h3><p>在实时系统中，可能存在着一些实时任务，它们都联系着一个截止时间。为保证系统能正常工作，实时调度必须能满足实时任务对截止时间的要求。</p>
+<ul>
+<li><strong>最早截止时间优先算法</strong><br>最早截止时间优先（Earliest Deadline First, EDF）算法是根据任务的截止时间确定任务的优先级，任务的截止时间越早，其优先级越高，具有最早截止时间的任务排在队列的队首。</li>
+<li><strong>最低松弛度优先算法</strong><br>最低松弛度优先（Least Laxity First, LLF）算法是根据任务紧急程度确定任务的优先级，任务的紧急程度越高，优先级就越高。<br>松弛度 = 完成截止时间- 运行时间(服务时间) - 当前时间<br>例如，任务 A 的完成截止时间是第 400s，运行时间为 100s，当前时间是第 150s，则 A 的松弛度 = 400-100-150 = 150s<blockquote>
+<p>在松弛度为 0 的时刻设置“地雷”，松弛度为 0 发生抢占。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h3><ul>
+<li>互斥<br>进程对所分配的资源进行排它性使用，即在一段时间内，某资源只能被一个进程占用。如果此时还有其它进程请求该资源，则请求进程只能等待，直到占有该资源的进程释放。</li>
+<li>请求与保持<br>进程已经持有了至少一个资源，但又提出新的资源请求。</li>
+<li>不可剥夺<br>已获得的资源在使用完之前，不能被抢占，只能在进程使用完自己释放。</li>
+<li>环路等待<br>存在一个“进程——资源”循环链，进程间互相等待资源。</li>
+</ul>
+<h3 id="处理死锁的方法"><a href="#处理死锁的方法" class="headerlink" title="处理死锁的方法"></a>处理死锁的方法</h3><ul>
+<li>预防死锁<br>设置限制条件，破坏产生死锁的一个或多个必要条件。比如，强制回收资源、资源一次性分配……</li>
+<li>避免死锁<br>在资源动态分配过程中，加入检查，防止系统进入不安全状态。</li>
+<li>检测死锁<br>建立检测机构检测死锁的发生和原因，确定相关的进程和资源。</li>
+<li>解除死锁<br>剥夺资源或撤销进程，从而解除死锁。</li>
+</ul>
+<h3 id="避免死锁的方法"><a href="#避免死锁的方法" class="headerlink" title="避免死锁的方法"></a>避免死锁的方法</h3><p>在死锁避免方法中，把系统的状态分为<strong>安全状态</strong>和<strong>不安全状态</strong>。当系统处于安全状态时，可避免发生死锁。反之，当系统处于不安全状态时，则可能进入到死锁状态。<br>所谓安全状态，是指系统能按某种进程顺序 &lt;P1, P2, …，Pn&gt; 来为每个进程<code>Pi</code>分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺利地完成，称 &lt;P1, P2, …, Pn&gt; 序列为安全序列。<br>如果系统无法找到这样一个安全序列，则称系统处于不安全状态。</p>
+<p>数据结构的定义：</p>
+<table>
+<thead>
+<tr>
+<th>定义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max</td>
+<td>进程对各种资源的最大需求</td>
+</tr>
+<tr>
+<td>Allocation</td>
+<td>进程已占用（分配）的各种资源的数量</td>
+</tr>
+<tr>
+<td>Need</td>
+<td>进程对各种资源的剩余需求量</td>
+</tr>
+<tr>
+<td>Available</td>
+<td>系统当前可用资源数量</td>
+</tr>
+<tr>
+<td>Work</td>
+<td>每个进程完成后系统可用资源数量<br>（初始值为 Available）</td>
+</tr>
+<tr>
+<td>Finish</td>
+<td>每个进程能否完成</td>
+</tr>
+</tbody>
+</table>
+<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><p>银行家算法原本是为银行系统设计的，以确保银行在发放现金贷款时，不会发生不能满足所有客户需要的情况。<br>当<strong>进程请求一组资源</strong>时，系统必须<strong>首先确定是否有足够的资源分配给该进程</strong>。若有，再进一步计算在将这些资源分配给进程后，是否会使系统处于不安全的状态。如果不会，才将资源分配给它。<br>判断方法：</p>
+<ol>
+<li><strong>虚拟执行</strong>这个分配请求，使得当前状态进入下一个状态；</li>
+<li>在下一个状态中寻找安全序列；</li>
+<li>若找到，说明状态安全，可以执行分配请求；否则拒绝分配请求。</li>
+</ol>
+<p><img src="http://p9ucdlghd.bkt.clouddn.com/banker-algorithm.png" alt="banker-algorithm"></p>
+<p>算法缺点：</p>
+<ul>
+<li>很少进程能够在运行前就知道它所需资源的最大值。</li>
+<li>系统内的进程数是不固定的，往往在不断变化，有新的进入，有完成的退出。</li>
+</ul>
+<hr>
+<p>😄 To be continued.<br>👉 <a href="/2018/07/04/all-os3">Next</a>.<br>👉 <a href="/2018/07/01/all-os">Previous</a>.</p>
 
       
     </div>
@@ -517,6 +588,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/04/all-os3/" rel="prev" title="操作系统知识总结3">
+                操作系统知识总结3 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -604,7 +679,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -675,7 +750,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理机调度"><span class="nav-number">1.</span> <span class="nav-text">处理机调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理机调度的层次"><span class="nav-number">1.1.</span> <span class="nav-text">处理机调度的层次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三级调度队列模型"><span class="nav-number">1.2.</span> <span class="nav-text">三级调度队列模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理机调度常见名词"><span class="nav-number">1.3.</span> <span class="nav-text">处理机调度常见名词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法"><span class="nav-number">1.4.</span> <span class="nav-text">调度算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理机调度"><span class="nav-number">1.</span> <span class="nav-text">处理机调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理机调度的层次"><span class="nav-number">1.1.</span> <span class="nav-text">处理机调度的层次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三级调度队列模型"><span class="nav-number">1.2.</span> <span class="nav-text">三级调度队列模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理机调度常见名词"><span class="nav-number">1.3.</span> <span class="nav-text">处理机调度常见名词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法"><span class="nav-number">1.4.</span> <span class="nav-text">调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实时调度"><span class="nav-number">1.5.</span> <span class="nav-text">实时调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">2.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#产生死锁的必要条件"><span class="nav-number">2.1.</span> <span class="nav-text">产生死锁的必要条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理死锁的方法"><span class="nav-number">2.2.</span> <span class="nav-text">处理死锁的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免死锁的方法"><span class="nav-number">2.3.</span> <span class="nav-text">避免死锁的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#银行家算法"><span class="nav-number">2.4.</span> <span class="nav-text">银行家算法</span></a></li></ol></li></ol></div>
             
 
           </div>
