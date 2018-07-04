@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0 word(s)
+                  968 word(s)
                 </span>
               
 
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  3 min(s)
                 </span>
               
             </div>
@@ -418,7 +418,41 @@
       
         
           
-            
+            <h2 id="存储器管理"><a href="#存储器管理" class="headerlink" title="存储器管理"></a>存储器管理</h2><h3 id="存储器的层次结构"><a href="#存储器的层次结构" class="headerlink" title="存储器的层次结构"></a>存储器的层次结构</h3><ul>
+<li>CPU 寄存器</li>
+<li>Cache 高速缓存</li>
+<li>主存储器（内存/主存）</li>
+<li>磁盘缓存</li>
+<li>固定磁盘</li>
+<li>可移动存储介质</li>
+</ul>
+<p>在存储层次中，层次越高（越靠近 CPU），存储介质的访问速度越快，价格也就越高，相应所配置的存储容量也越小。<br>高速缓存、主存储器和磁盘缓存均属于操作系统<strong>存储管理的管辖范畴</strong>，掉电后存储的信息就不存在了。而低层的固定磁盘和可移动存储介质则属于<strong>设备管理的管辖范畴</strong>，它们存储的信息将被长期保存。</p>
+<h3 id="存储器的管理目标"><a href="#存储器的管理目标" class="headerlink" title="存储器的管理目标"></a>存储器的管理目标</h3><ul>
+<li>为用户使用存储器提供方便，用户只需要在自己的逻辑内存空间编程，不需要考虑真实内存的物理位置。</li>
+<li>为用户提供充分大的存储空间。</li>
+<li>提高内存的利用率，将尽量多的用户调入内存运行。</li>
+</ul>
+<h3 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h3><p>程序进入内存的流程步骤：</p>
+<ul>
+<li>编译：源代码 -&gt; 目标模块</li>
+<li>链接：目标模块 + 库函数 -&gt; 装入模块</li>
+<li>装入：装入内存</li>
+</ul>
+<p><img src="http://p9ucdlghd.bkt.clouddn.com/compile-link-load.png" alt="compile-link-load"></p>
+<h3 id="连续分配方式"><a href="#连续分配方式" class="headerlink" title="连续分配方式"></a>连续分配方式</h3><p>为了能将用户程序装入内存，必须为它分配一定大小的内存空间。连续分配方式是最早出现的一种存储器分配方式，该方式是为一个用户程序分配一个连续的内存空间。有以下几种分配方式：</p>
+<ul>
+<li>单一连续分配<br>在单道程序环境下，内存分为<strong>系统区</strong>和<strong>用户区</strong>两部分。整个内存的用户空间由该程序独占。</li>
+<li>固定分区连续分配（容易造成浪费）<br>将内存划分为多个区域，每个区域大小固定且只能装入一个程序。<br>分区大小相等的划分一般用于多个相同任务；分区大小不等的划分一般根据实际任务大小分配。<br><img src="http://p9ucdlghd.bkt.clouddn.com/fixed-size-partition.png" alt="fixed-size-partition"></li>
+<li>动态分区分配<br>无固定分区，在整块内存空间中动态分割；根据程序大小，动态分配<strong>连续</strong>的内存空间，分配的内存大小等于程序大小。</li>
+<li>基于顺序搜索的动态分区分配算法<br>为了<strong>实现动态分区分配</strong>，通常是将系统中的空闲分区链接成一个链。顺序搜索，是指依次搜索空闲分区链上的空闲分区，去寻找一个其大小能满足要求的分区。有以下几种算法：<ul>
+<li><strong>首次适应算法</strong><br>首次适应（First Fit, FF）算法是按顺序选择第一个满足要求的内存区域。<br><strong>优点</strong>：保留了高地址的大部分空间，为以后到达的大作业分配大的内存空间创造了条件。<br><strong>缺点</strong>：低址部分不断被划分，会留下许多难以利用的、很小的空间（碎片）。</li>
+<li><strong>循环首次适应算法</strong><br>循环首次适应（Next Fit, NF）算法是在上一次找到空闲分区的下一个分区开始寻找，找到第一个满足要求的内存区。<br><strong>优点</strong>：空闲分区在内存中分配均匀，查找时间短。<br><strong>缺点</strong>：缺乏大的内存空间。</li>
+<li><strong>最佳适应算法</strong><br>最佳适应（Best Fit, BF）算法是指每次为作业分配内存时，总是把能满足要求、又是最小的空闲分区分配给作业，避免“大材小用”。<br><strong>优点</strong>：提高内存利用率，保留大空闲区。<br><strong>缺点</strong>：仍然存在小片无法利用的空闲分区（碎片）。</li>
+</ul>
+</li>
+<li>动态可重定位分区分配<br>对内存中正在使用的分区进行搬迁，使多个小的空闲分区（碎片）合并为一个大的空闲分区。<br><img src="http://p9ucdlghd.bkt.clouddn.com/pelocatable-partition.png" alt="pelocatable-partition"></li>
+</ul>
+
           
         
       
@@ -590,7 +624,7 @@
       
         
           <h2 id="处理机调度"><a href="#处理机调度" class="headerlink" title="处理机调度"></a>处理机调度</h2><h3 id="处理机调度的层次"><a href="#处理机调度的层次" class="headerlink" title="处理机调度的层次"></a>处理机调度的层次</h3><ul>
-<li>高级调度（作业调度）<br>根据调度算法和计算机状态，从外存选择一个或多个作业调度内存。<ul>
+<li>高级调度（作业调度）<br>根据调度算法和计算机状态，从外存选择一个或多个作业调入内存。<ul>
 <li>创建进程</li>
 <li>分配内存等资源</li>
 <li>将进程放入就绪队列等待 CPU 调度。
