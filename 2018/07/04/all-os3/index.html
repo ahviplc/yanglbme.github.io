@@ -99,7 +99,10 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/pelocatable-partition.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/paging.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/page-table.png">
-<meta property="og:updated_time" content="2018-07-05T15:38:20.415Z">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/address-conversion.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/segmentation.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/segment-table.png">
+<meta property="og:updated_time" content="2018-07-06T12:26:30.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结3">
 <meta name="twitter:description" content="存储器管理存储器的层次结构 CPU 寄存器 Cache 高速缓存 主存储器（内存/主存） 磁盘缓存 固定磁盘 可移动存储介质">
@@ -393,7 +396,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,156 word(s)
+                  1,372 word(s)
                 </span>
               
 
@@ -409,7 +412,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4 min(s)
+                  5 min(s)
                 </span>
               
             </div>
@@ -478,7 +481,9 @@
 <li>页的编号在逻辑地址上是连续的，在物理块分布上是离散的。</li>
 </ul>
 <p><img src="http://p9ucdlghd.bkt.clouddn.com/paging.png" alt="paging"></p>
-<p><strong>页表</strong>记录了进程每一页在内存存放的块号。<br><img src="http://p9ucdlghd.bkt.clouddn.com/page-table.png" alt="page-table"></p>
+<p><strong>页表</strong>记录了进程每一页在内存存放的块号。页内地址直接对应块内地址。<br><img src="http://p9ucdlghd.bkt.clouddn.com/page-table.png" alt="page-table"></p>
+<p>地址转换机构：<br>地址转换是将用户空间中的<strong>逻辑地址</strong>转换为内存空间中的<strong>物理地址</strong>。而页内地址与物理地址一一对应，因此地址变换机构的任务的任务实际上只是将逻辑地址中的页号转换为内存中的物理块号。<br><img src="http://p9ucdlghd.bkt.clouddn.com/address-conversion.png" alt="address-conversion"></p>
+<h3 id="基本分段存储管理方式"><a href="#基本分段存储管理方式" class="headerlink" title="基本分段存储管理方式"></a>基本分段存储管理方式</h3><p>分段是指将一个进程划分为多个具有逻辑意义而且相对独立的部分。例如主程序段、数据段、堆栈段、子程序段等……<br>每个段都有独立的名称，为了管理方便，用段号表示。在逻辑地址意义上，每个段包含两部分：段号、段内地址。<br><img src="http://p9ucdlghd.bkt.clouddn.com/segmentation.png" alt="segmentation"><br>作业空间与内存空间的映射，借助于段表：<br><img src="http://p9ucdlghd.bkt.clouddn.com/segment-table.png" alt="segment-table"></p>
 
       
     </div>
@@ -676,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器管理"><span class="nav-number">1.</span> <span class="nav-text">存储器管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的层次结构"><span class="nav-number">1.1.</span> <span class="nav-text">存储器的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的管理目标"><span class="nav-number">1.2.</span> <span class="nav-text">存储器的管理目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入和链接"><span class="nav-number">1.3.</span> <span class="nav-text">程序的装入和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续分配方式"><span class="nav-number">1.4.</span> <span class="nav-text">连续分配方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">1.5.</span> <span class="nav-text">基本分页存储管理方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器管理"><span class="nav-number">1.</span> <span class="nav-text">存储器管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的层次结构"><span class="nav-number">1.1.</span> <span class="nav-text">存储器的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的管理目标"><span class="nav-number">1.2.</span> <span class="nav-text">存储器的管理目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入和链接"><span class="nav-number">1.3.</span> <span class="nav-text">程序的装入和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续分配方式"><span class="nav-number">1.4.</span> <span class="nav-text">连续分配方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">1.5.</span> <span class="nav-text">基本分页存储管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分段存储管理方式"><span class="nav-number">1.6.</span> <span class="nav-text">基本分段存储管理方式</span></a></li></ol></li></ol></div>
             
 
           </div>
