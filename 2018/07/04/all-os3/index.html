@@ -107,7 +107,13 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/lru-page-replacement-algorithm.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/shift-register.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/heap-stack.png">
-<meta property="og:updated_time" content="2018-07-06T13:54:11.445Z">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/simple-clock-page-replacement-algorithm.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/disk.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/first-come-first-served-disk.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/shortest-seek-time-first.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/scan.png">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/cscan.png">
+<meta property="og:updated_time" content="2018-07-07T07:03:50.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结3">
 <meta name="twitter:description" content="存储器管理存储器的层次结构 CPU 寄存器 Cache 高速缓存 主存储器（内存/主存） 磁盘缓存 固定磁盘 可移动存储介质">
@@ -401,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,284 word(s)
+                  3,045 word(s)
                 </span>
               
 
@@ -417,7 +423,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8 min(s)
+                  10 min(s)
                 </span>
               
             </div>
@@ -523,8 +529,66 @@
 <li>栈底保留的是最久未被访问的页，即置换目标。<br><img src="http://p9ucdlghd.bkt.clouddn.com/heap-stack.png" alt="heap-stack"></li>
 </ul>
 </li>
-<li>简单的 Clock 置换算法<br>该算法是 LRU 算法的近似算法，也称为最近未用算法。它为每一页设置一访问位，当被访问则设置为 1，未访问为 0。</li>
+<li>简单 Clock 置换算法<br>该算法是 LRU 算法的近似算法，也称为<strong>最近未用</strong>算法。它为每一页设置一访问位，实际编程中用整型数组来表示当前业内是否被访问，1 代表被访问过，0 代表未访问过。<br>每次置换，指针循环遍历，找出第一个访问位为 0 的那个内存页面。若该页面访问位为 1，则将访问位置 0，指针继续移动。<br><img src="http://p9ucdlghd.bkt.clouddn.com/simple-clock-page-replacement-algorithm.png" alt="simple-clock-page-replacement-algorithm"></li>
+<li>改进型 Clock 置换算法<br>每个页面设置有<strong>访问位 A</strong> 和<strong>修改位 M</strong>，两个位组合成四种类型的页面（见下方表格）<br>执行过程：<ul>
+<li>从当前指针位置开始扫描循环队列，寻找第 1 类页面，<strong>不改变访问位 A</strong>，将遇到的第一个这类页面作为淘汰页；</li>
+<li>第一步查找失败，寻找第 2 类页面，将遇到的第一个这类页面作为淘汰页。在扫描期间，所有扫描过的页面的访问位 A 都置 0；</li>
+<li>所有 3 类页面变成 1 类页面，4 类页面变成 2 类页面；</li>
+<li>第二步失败，重复第一步；</li>
+<li>如果仍失败，再重复第二步，此时就一定能找到被淘汰的页。 </li>
 </ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>页面类别</th>
+<th>访问位 A</th>
+<th>访问位 M</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>最近未被访问，又未被修改，最佳淘汰页。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>最近未被访问，但已被修改页。</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+<td>最近已被访问， 但未被修改。</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>最近已被访问且被修改，最不应淘汰页。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>最少使用算法<br>最少使用（Least Frequently Used, LFU）置换算法对每个页面设置一个字段（移位寄存器），用来记录页面被访问的频率。</li>
+</ul>
+<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><h3 id="磁盘的结构"><a href="#磁盘的结构" class="headerlink" title="磁盘的结构"></a>磁盘的结构</h3><p>磁盘由多个盘片组成，每个盘片分为两个盘面，每个盘面分若干个磁道（同心圆），每个磁道分若干个扇区。<br><img src="http://p9ucdlghd.bkt.clouddn.com/disk.png" alt="disk"></p>
+<h3 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h3><ul>
+<li>先来先服务<br>每个请求按照时间顺序来处理。缺点是平均寻道距离较大。<br><img src="http://p9ucdlghd.bkt.clouddn.com/first-come-first-served-disk.png" alt="first-come-first-served"></li>
+<li>最短寻道时间优先<br>平均寻道时间较短。缺点是：“饥饿”现象，即某些进程长期得不到访问；“磁臂粘着”现象，即磁头可能长期停留在同一磁道。<br><img src="http://p9ucdlghd.bkt.clouddn.com/shortest-seek-time-first.png" alt="shortest-seek-time-first"></li>
+<li>扫描<br>SCAN，又称为电梯调度算法，针对最短寻道优先的“饥饿”现象进行改进，依据磁头移动方向访问当前磁道最近的目标磁道。<br><img src="http://p9ucdlghd.bkt.clouddn.com/scan.png" alt="scan"></li>
+<li>循环扫描<br>CSCAN，到达最外磁道后，返回最内磁道开始扫描。磁头移动方向固定不变，不会中途折返。优点是不会出现“饥饿”现象，平均寻道时间较短，最长等待时间比扫描算法少一半。缺点是“磁臂粘着现象仍未解决。<br><img src="http://p9ucdlghd.bkt.clouddn.com/cscan.png" alt="cscan.png"></li>
+<li>N-Step-SCAN 算法<br>为了解决“磁臂粘着”现象，将请求序列划分为多个子序列，新请求只能进入后面的子序列，不能进入当前子序列，避免粘着现象。</li>
+<li>FSCAN 算法<br>N-Step-SCAN 算法的简化版，只划分两个子序列，一个当前序列，一个后备序列。</li>
+</ul>
+<hr>
+<p>🤭 操作系统知识总结系列完~<br>👉 <a href="/2018/07/04/all-os2">Previous</a>.</p>
 
       
     </div>
@@ -726,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器管理"><span class="nav-number">1.</span> <span class="nav-text">存储器管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的层次结构"><span class="nav-number">1.1.</span> <span class="nav-text">存储器的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的管理目标"><span class="nav-number">1.2.</span> <span class="nav-text">存储器的管理目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入和链接"><span class="nav-number">1.3.</span> <span class="nav-text">程序的装入和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续分配方式"><span class="nav-number">1.4.</span> <span class="nav-text">连续分配方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">1.5.</span> <span class="nav-text">基本分页存储管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分段存储管理方式"><span class="nav-number">1.6.</span> <span class="nav-text">基本分段存储管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段页式管理方式"><span class="nav-number">1.7.</span> <span class="nav-text">段页式管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面置换算法"><span class="nav-number">1.8.</span> <span class="nav-text">页面置换算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器管理"><span class="nav-number">1.</span> <span class="nav-text">存储器管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的层次结构"><span class="nav-number">1.1.</span> <span class="nav-text">存储器的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器的管理目标"><span class="nav-number">1.2.</span> <span class="nav-text">存储器的管理目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入和链接"><span class="nav-number">1.3.</span> <span class="nav-text">程序的装入和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续分配方式"><span class="nav-number">1.4.</span> <span class="nav-text">连续分配方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">1.5.</span> <span class="nav-text">基本分页存储管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本分段存储管理方式"><span class="nav-number">1.6.</span> <span class="nav-text">基本分段存储管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段页式管理方式"><span class="nav-number">1.7.</span> <span class="nav-text">段页式管理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面置换算法"><span class="nav-number">1.8.</span> <span class="nav-text">页面置换算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘管理"><span class="nav-number">2.</span> <span class="nav-text">磁盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘的结构"><span class="nav-number">2.1.</span> <span class="nav-text">磁盘的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘调度算法"><span class="nav-number">2.2.</span> <span class="nav-text">磁盘调度算法</span></a></li></ol></li></ol></div>
             
 
           </div>
