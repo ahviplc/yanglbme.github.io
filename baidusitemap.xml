@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/06/27/Just-Do-IT/</loc>
+    <lastmod>2018-07-11T11:17:39.749Z</lastmod>
+    <data>
+        <display>
+        <title>Just Do IT</title>
+        <pubTime>2018-06-27T13:14:07.000Z</pubTime>
+        
+        <tag>plan</tag>
+         
+         
+           
+             
+              <breadCrumb title="Dev" url="https://yanglbme.github.io/categories/Dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/07/10/singleton-pattern/</loc>
-    <lastmod>2018-07-10T11:29:02.379Z</lastmod>
+    <lastmod>2018-07-10T11:36:07.593Z</lastmod>
     <data>
         <display>
         <title>设计模式系列——单例模式</title>
@@ -181,26 +201,6 @@
            
              
               <breadCrumb title="Life" url="https://yanglbme.github.io/categories/Life/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yanglbme.github.io/2018/06/27/Just-Do-IT/</loc>
-    <lastmod>2018-06-28T09:18:11.235Z</lastmod>
-    <data>
-        <display>
-        <title>Just Do IT</title>
-        <pubTime>2018-06-27T13:14:07.000Z</pubTime>
-        
-        <tag>plan</tag>
-         
-         
-           
-             
-              <breadCrumb title="Dev" url="https://yanglbme.github.io/categories/Dev/"/>
           
         </display>
     </data>
