@@ -94,10 +94,12 @@
 <meta property="og:site_name" content="Bingo&#39;s Blog">
 <meta property="og:description" content="前言面试中经常会遇到 HashMap 相关的问题，以前没有做深入的研究，导致在面试过程中没能把原理跟面试官讲清楚😭。这一次必须彻底弄懂才行✊。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-11T14:15:00.031Z">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/hash.jpg">
+<meta property="og:updated_time" content="2018-07-12T02:40:44.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解 HashMap 底层实现原理">
 <meta name="twitter:description" content="前言面试中经常会遇到 HashMap 相关的问题，以前没有做深入的研究，导致在面试过程中没能把原理跟面试官讲清楚😭。这一次必须彻底弄懂才行✊。">
+<meta name="twitter:image" content="http://p9ucdlghd.bkt.clouddn.com/hash.jpg">
 
 
 
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  190 word(s)
+                  1,316 word(s)
                 </span>
               
 
@@ -403,7 +405,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  5 min(s)
                 </span>
               
             </div>
@@ -426,8 +428,24 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>面试中经常会遇到 HashMap 相关的问题，以前没有做深入的研究，导致在面试过程中没能把原理跟面试官讲清楚😭。这一次必须彻底弄懂才行✊。<br><a id="more"></a></p>
 <h2 id="什么是哈希表"><a href="#什么是哈希表" class="headerlink" title="什么是哈希表"></a>什么是哈希表</h2><p>哈希表也叫散列表，它的主干其实是数组。我们知道，在数组中查找某一个元素，只需要根据下标就能一次定位到，而哈希表正是利用了这一特性。</p>
-<p>举个栗子🌰，我们要新增或查找某个元素，只要把当前元素的关键字通过某个函数<strong>映射</strong>到数组中的<strong>某个位置</strong>，通过数组下标的一次定位就能完成操作。即：<code>位置 = f(关键字)</code>。</p>
-
+<p>举个栗子🌰，我们要新增或查找某个元素，只要把当前元素的关键字通过某个函数<strong>映射</strong>到数组中的<strong>某个位置</strong>，通过数组下标的一次定位就能完成操作。即：<code>位置 = f(关键字)</code>。f 函数其实就是哈希函数，这个函数设计的好坏会直接影响到哈希表的性能。<br><img src="http://p9ucdlghd.bkt.clouddn.com/hash.jpg" alt="hash"></p>
+<h2 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h2><p>如果两个不同的元素，通过哈希函数计算出的实际存储地址相同，那该怎么办？也就是说，当我们对某个元素进行哈希运算而得到一个存储地址，然后要进行插入，发现此时该位置已经被其他元素“霸占”了，这其实就是所谓的“<strong>哈希冲突</strong>”，也叫“<strong>哈希碰撞</strong>”👊。</p>
+<p>前面已经提到，哈希函数设计至关重要，一个<strong>好的哈希函数</strong>会尽可能<strong>保证计算简单</strong>和<strong>散列地址分布均匀</strong>，也就是说，对任意 key，f(key) 对应不同地址的概率相等。但是数组是一块连续固定长度的内存空间，再好的哈希也<strong>无法保证</strong>得到的存储地址绝对不会冲突。那么当发生哈希冲突，该如何处理呢？</p>
+<p>常见的有以下几种处理方式：</p>
+<ul>
+<li><p>开放定址法（再散列法）<br>当 key 对应的哈希地址 <code>p=f(key)</code> 出现冲突时，以 p 为基础，产生另一个哈希地址，若依然冲突，继续以 p 为基础，产生另一个哈希地址 p2……直到找到一个不冲突的哈希地址 pi，将元素存入其中。这种方式有一个通用的<strong>再散列函数形式</strong>，其中 f(key) 为哈希函数，m 为表长，di 为增量序列。增量序列的取值方式不同，相应的再散列方式也不同：<br><center><code>pi = (f(key) + di) % m，(i = 1, 2, ..., n)</code><center></center></center></p>
+</li>
+<li><p>再哈希法<br>这种方式是同时构造多个不同的哈希函数，当哈希地址 f1(key) 发生冲突时，再计算 f2(key)……直到不再发生冲突。这种方式不易产生聚集现象，但增加了计算的时间。</p>
+<center><code>pi = f1(key)，(i = 1, 2, ..., k)</code></center>
+</li>
+<li><p>链地址法<br>这种方式是将所有哈希地址为 i 的元素<strong>构成一个单链表</strong>，并将单链表中的<strong>头指针</strong>存在哈希表的第 i 个单元中，因此查找、插入和删除主要是在链表中进行。链地址法适用于经常进行插入和删除的情况。<strong>HashMap</strong> 就是采用这种方式😮，数组 + 链表。</p>
+</li>
+</ul>
+<h2 id="HashMap-原理分析"><a href="#HashMap-原理分析" class="headerlink" title="HashMap 原理分析"></a>HashMap 原理分析</h2><p>HashMap 的主干是一个 Entry 数组。Entry 是 HashMap 的基本组成单元，每一个 Entry 包含一个 key-value 键值对。</p>
+<p>简单来说，HashMap 由“<strong>数组 + 链表</strong>”组成的，数组是 HashMap 的主体，链表主要为了解决哈希冲突，如果定位到的数组位置不含链表（即当前 entry 的 next 指向 null）,那么对于查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为 O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，同样需要遍历链表，然后通过 key 对象的 equals 方法逐一比对查找。所以，性能考虑，HashMap 中的链表出现越少，性能才会越好。</p>
+<h3 id="HashMap-的初始化"><a href="#HashMap-的初始化" class="headerlink" title="HashMap 的初始化"></a>HashMap 的初始化</h3><p>在 HashMap 实例化时需要了解两个概念：<strong>初始容量</strong>和<strong>加载因子</strong>。HashMap 基于哈希表的 Map 接口实现，初始容量是哈希表在创建时的容量。加载因子是哈希表在其<strong>容量自动增加之前</strong>可以达到多满的一种尺度。当哈希表中的条目数超过了<strong>加载因子</strong>与<strong>当前容量</strong>的乘积时，则要对该哈希表进行 rehash 操作（即重建内部数据结构），从而哈希表将具有大约两倍于当前容量的新的容量。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认初始容量 16</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义最大容量</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//默认负载因子 0.75</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">transient</span> Entry[] table;</span><br><span class="line"></span><br><span class="line"><span class="comment">//临界值，值为容量与加载因子的乘积</span></span><br><span class="line"><span class="keyword">int</span> threshold; </span><br><span class="line"></span><br><span class="line"><span class="comment">//加载因子</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">float</span> loadFactor; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;</span><br><span class="line">    threshold = (<span class="keyword">int</span>)(DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);</span><br><span class="line">    table = <span class="keyword">new</span> Entry[DEFAULT_INITIAL_CAPACITY];</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上构造方法定义了一个空的 HashMap，其默认初始容量为 16，默认初始加载因子为 0.75，同时声明了一个 Entry 类型的数组，数组初始长度为 16。</p>
+<h3 id="HshMap-的底层数据结构"><a href="#HshMap-的底层数据结构" class="headerlink" title="HshMap 的底层数据结构"></a>HshMap 的底层数据结构</h3>
       
     </div>
     
@@ -624,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是哈希表"><span class="nav-number">2.</span> <span class="nav-text">什么是哈希表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是哈希表"><span class="nav-number">2.</span> <span class="nav-text">什么是哈希表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希冲突"><span class="nav-number">3.</span> <span class="nav-text">哈希冲突</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-原理分析"><span class="nav-number">4.</span> <span class="nav-text">HashMap 原理分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-的初始化"><span class="nav-number">4.1.</span> <span class="nav-text">HashMap 的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HshMap-的底层数据结构"><span class="nav-number">4.2.</span> <span class="nav-text">HshMap 的底层数据结构</span></a></li></ol></li></ol></div>
             
 
           </div>
