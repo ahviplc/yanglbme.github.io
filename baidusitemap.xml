@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/07/15/volatile/</loc>
+    <lastmod>2018-07-15T01:03:43.376Z</lastmod>
+    <data>
+        <display>
+        <title>Java 并发系列——深入 volatile 关键字</title>
+        <pubTime>2018-07-15T01:01:33.000Z</pubTime>
+        
+        <tag>volatile</tag>
+         
+         
+           
+             
+              <breadCrumb title="Concurrence" url="https://yanglbme.github.io/categories/Concurrence/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/07/13/multi-thread-execution-sequence/</loc>
-    <lastmod>2018-07-14T02:48:21.001Z</lastmod>
+    <lastmod>2018-07-14T02:51:37.916Z</lastmod>
     <data>
         <display>
         <title>Java 并发系列——控制多线程的执行顺序</title>
