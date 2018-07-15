@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="前言在 Java 并发编程中 synchronized 一直是元老级角色，很多人称呼它为重量级锁。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并不那么笨重了。">
+<meta name="description" content="前言在 Java 并发编程中 synchronized 一直是👴元老级角色，很多人称呼它为重量级锁。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并不那么笨重了。">
 <meta name="keywords" content="synchronized">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 并发系列——深入 synchronized 关键字">
 <meta property="og:url" content="https://yanglbme.github.io/2018/07/15/synchronized/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="前言在 Java 并发编程中 synchronized 一直是元老级角色，很多人称呼它为重量级锁。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并不那么笨重了。">
+<meta property="og:description" content="前言在 Java 并发编程中 synchronized 一直是👴元老级角色，很多人称呼它为重量级锁。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并不那么笨重了。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T07:05:47.320Z">
+<meta property="og:updated_time" content="2018-07-15T08:01:27.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 并发系列——深入 synchronized 关键字">
-<meta name="twitter:description" content="前言在 Java 并发编程中 synchronized 一直是元老级角色，很多人称呼它为重量级锁。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并不那么笨重了。">
+<meta name="twitter:description" content="前言在 Java 并发编程中 synchronized 一直是👴元老级角色，很多人称呼它为重量级锁。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并不那么笨重了。">
 
 
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  163 word(s)
+                  626 word(s)
                 </span>
               
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  3 min(s)
                 </span>
               
             </div>
@@ -424,16 +424,26 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Java 并发编程中 synchronized 一直是元老级角色，很多人称呼它为<strong>重量级锁</strong>。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并<strong>不那么笨重了</strong>。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在 Java 并发编程中 synchronized 一直是👴元老级角色，很多人称呼它为<strong>重量级锁</strong>。但是，随着 JavaSE 1.6 对 synchronized 进行了各种优化后，有些情况下它并<strong>不那么笨重了</strong>。</p>
 <a id="more"></a>
 <h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>synchronized 可以实现同步、内存可见性、原子性。</p>
-<p>Java 中每个对象都可以作为锁，这是 synchronized 实现同步的基础：</p>
+<p>Java 中每个对象都可以作为锁🔒，这是 synchronized 实现同步的基础：</p>
 <ul>
-<li>对于普通同步方法，锁是当前实例对象</li>
-<li>对于静态同步方法，锁是当前类的 Class 对象</li>
-<li>对于同步代码块，锁是 synchronized()括号里配置的对象</li>
+<li>对于<strong>普通同步方法</strong>，锁是当前<strong>实例对象</strong></li>
+<li>对于<strong>静态同步方法</strong>，锁是当前类的 <strong>Class 对象</strong></li>
+<li>对于<strong>同步方法代码块</strong>，锁是 synchronized() <strong>括号配置的对象</strong></li>
 </ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>👉 <a href="http://paver62xl.bkt.clouddn.com/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF.pdf" target="_blank" rel="noopener">《Java 并发编程的艺术》</a></p>
+<p>当一个线程试图访问同步代码块时，它首先必须得到锁，退出或抛出异常时必须要释放锁。</p>
+<p>从 JVM 规范中可以看到 synchronized 在 JVM 里的实现原理，JVM 基于<strong>进入和退出 Monitor 对象</strong>来实现方法同步和代码块同步，但两者的实现细节不同。</p>
+<ul>
+<li><strong>代码块同步</strong>使用 <code>monitorenter</code> 和 <code>monitorexit</code> 指令实现。</li>
+<li><strong>方法同步</strong>依靠方法修饰符上的 <code>ACC_SYNCHRONIZED</code> 实现。</li>
+</ul>
+<p>来看一段简单代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 普通同步方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">testSynchronizedMethod</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 同步方法代码块</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSynchronizedBlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(SynchronizedTest.class) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 cmd 使用 <code>javap</code> 命令 查看 <code>.class</code> 文件信息：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v Synchronized.class</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，对于<strong>同步方法代码块</strong><code>testSynchronizedBlock</code>，<code>monitorenter</code> 指令插入到同步代码块的开始位置（见第 9 行），<code>monitorexit</code> 指令插入到同步代码块的结束位置（见第 11 行）。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public void testSynchronizedBlock();</span><br><span class="line">   descriptor: ()V</span><br><span class="line">   flags: ACC_PUBLIC</span><br><span class="line">   Code:</span><br><span class="line">     stack=2, locals=3, args_size=1</span><br><span class="line">        0: ldc           #2                  // class SynchronizedTest</span><br><span class="line">        2: dup</span><br><span class="line">        3: astore_1</span><br><span class="line">        4: monitorenter</span><br><span class="line">        5: aload_1</span><br><span class="line">        6: monitorexit</span><br><span class="line">        7: goto          15</span><br><span class="line">       10: astore_2</span><br><span class="line">       11: aload_1</span><br><span class="line">       12: monitorexit</span><br><span class="line">       13: aload_2</span><br><span class="line">       14: athrow</span><br><span class="line">       15: return</span><br></pre></td></tr></table></figure></p>
+<p>而同步方法<code>testSynchronizedMethod</code>则会被翻译成普通的方法和返回指令。在 字节码层面并没有任何特别的指令来实现被 synchronized 修饰的方法，而在 <code>.class</code> 文件的方法表中将该方法的 <code>flags</code> 字段的 <code>ACC_SYNCHRONIZED</code> 标志位<strong>置 1</strong>（见第 3 行），表示该方法是同步方法并使用调用该方法的对象或该方法所属的 Class 对象表示 Klass 做为锁对象。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void testSynchronizedMethod();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC, ACC_SYNCHRONIZED</span><br><span class="line">    Code:</span><br><span class="line">      stack=0, locals=1, args_size=1</span><br><span class="line">         0: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 5: 0</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java-对象头"><a href="#Java-对象头" class="headerlink" title="Java 对象头"></a>Java 对象头</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>👉 <a href="http://paver62xl.bkt.clouddn.com/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF.pdf" target="_blank" rel="noopener">《Java 并发编程的艺术》</a><br>👉 <a href="http://cmsblogs.com/?p=2071" target="_blank" rel="noopener">《死磕 Java 并发：深入分析 synchronized 的实现原理》</a></p>
 
       
     </div>
@@ -631,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">2.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">2.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-对象头"><span class="nav-number">3.</span> <span class="nav-text">Java 对象头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
