@@ -86,18 +86,20 @@
 
 
 
-<meta name="description" content="A Web Developer, major in Java.">
+<meta name="description" content="Java 内存模型在 Java 里，如果一个字段被声明成 volatile，Java 线程内存模型能确保所有线程看到的这个字段的值是一致的。 先来了解什么是 Java 内存模型。👇">
 <meta name="keywords" content="volatile">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 并发系列——深入 volatile 关键字">
 <meta property="og:url" content="https://yanglbme.github.io/2018/07/15/volatile/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="A Web Developer, major in Java.">
+<meta property="og:description" content="Java 内存模型在 Java 里，如果一个字段被声明成 volatile，Java 线程内存模型能确保所有线程看到的这个字段的值是一致的。 先来了解什么是 Java 内存模型。👇">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T01:03:43.376Z">
+<meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/java-memory-model.png">
+<meta property="og:updated_time" content="2018-07-15T02:49:30.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 并发系列——深入 volatile 关键字">
-<meta name="twitter:description" content="A Web Developer, major in Java.">
+<meta name="twitter:description" content="Java 内存模型在 Java 里，如果一个字段被声明成 volatile，Java 线程内存模型能确保所有线程看到的这个字段的值是一致的。 先来了解什么是 Java 内存模型。👇">
+<meta name="twitter:image" content="http://p9ucdlghd.bkt.clouddn.com/java-memory-model.png">
 
 
 
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0 word(s)
+                  819 word(s)
                 </span>
               
 
@@ -403,7 +405,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  3 min(s)
                 </span>
               
             </div>
@@ -424,7 +426,33 @@
       
 
       
-        
+        <h2 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h2><p>在 Java 里，如果一个字段被声明成 volatile，Java 线程<strong>内存模型</strong>能确保所有线程看到的这个字段的值是一致的。</p>
+<p>先来了解什么是 Java 内存模型。👇</p>
+<a id="more"></a>
+<p>Java 内存模型（简称 JMM）控制了线程之间的通信，JMM 决定一个线程对共享变量的写入何时对另一个线程可见。</p>
+<p>从抽象的层面来看，<strong>JMM 定义了线程和主内存之间的抽象关系</strong>：线程之间的<strong>共享变量</strong>存储在<strong>主内存</strong>中，每个线程都有一个私有的<strong>本地内存</strong>，本地内存存储着<strong>共享变量的副本</strong>。需要注意的是，本地内存只是 JMM 的一个抽象概念，不是真实存在。<br><img src="http://p9ucdlghd.bkt.clouddn.com/java-memory-model.png" alt="java-memory-model"></p>
+<p>若线程 A、B 之间要通信，必须经历以下<strong>两步</strong>：</p>
+<ol>
+<li>线程 A 把本地内存 A 中更新的共享变量刷新到主内存中。</li>
+<li>线程 B 到主内存中区读取线程 A 之间更新过的共享变量。</li>
+</ol>
+<p>从整体上看，以上步骤实质是线程 A 向 B 发送消息，而且这个通信过程必须要经过主内存。JMM 通过控制主内存与每个线程的本地内存之间的交互，来保证内存可见性。</p>
+<h2 id="volatile-底层实现原理"><a href="#volatile-底层实现原理" class="headerlink" title="volatile 底层实现原理"></a>volatile 底层实现原理</h2><p>我们可以从<strong>汇编代码</strong>层面来看 volatile 变量。</p>
+<p>对于一行 Java 代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">instance = <span class="keyword">new</span> Singleton(); <span class="comment">//instance 是 volatile 变量</span></span><br></pre></td></tr></table></figure></p>
+<p>在 X86 处理器下，转换成汇编代码，会多出一行带有 <code>Lock</code> 前缀的指令：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x01a3de1d: movb $0×0,0×1104800(%esi);0x01a3de24: lock addl $0×0,(%esp);</span><br></pre></td></tr></table></figure></p>
+<p>Lock 前缀的指令在多核处理器下会引发<strong>两个动作</strong>：</p>
+<ol>
+<li>将当前处理器缓存行的数据写回到系统内存。</li>
+<li>这个写回内存的操作会使其他 CPU 里缓存了该内存地址的数据无效。</li>
+</ol>
+<p>为了提高处理速度，<strong>处理器不与内存直接通信</strong>，而是先将系统内存的数据读到本地缓存后再进行操作。如果对声明了 volatile 的变量进行✍写操作，JVM 会向处理器发送一条🔒 Lock 前缀的指令，将这个变量所在缓存行的数据写回到系统内存。此时其他处理器缓存的值还是旧的，若再执行计算操作就会出现问题。</p>
+<p>为了保证各个处理器的缓存是一致的，会实现<strong>缓存一致性协议</strong>，每个处理器通过<strong>嗅探在总线上传播的数据</strong>来检查自己当前缓存的值是否过期，当处理器发现自己缓存行对应的内存地址被修改，就会将当前处理器的缓存行设置成<strong>无效</strong>状态🚩，当处理器对这个数据进行操作时，会重新从系统内存中把数据读到处理器缓存里。</p>
+<h2 id="volatile-特性"><a href="#volatile-特性" class="headerlink" title="volatile 特性"></a>volatile 特性</h2><ul>
+<li>可见性：对于一个 volatile 变量的读，在任意线程总是能看到对这个 volatile 变量的最后写入。</li>
+<li>原子性：对任意单个 volatile 变量的读/写具有原子性，但类型 <code>volatile++</code> 这种复合操作不具有原子性。</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>👉 <a href="http://paver62xl.bkt.clouddn.com/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF.pdf" target="_blank" rel="noopener">《Java 并发编程的艺术》</a></p>
+
       
     </div>
     
@@ -521,8 +549,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -602,6 +639,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-内存模型"><span class="nav-number">1.</span> <span class="nav-text">Java 内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile-底层实现原理"><span class="nav-number">2.</span> <span class="nav-text">volatile 底层实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile-特性"><span class="nav-number">3.</span> <span class="nav-text">volatile 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
