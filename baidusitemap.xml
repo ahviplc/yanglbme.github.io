@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/07/16/factory-pattern/</loc>
+    <lastmod>2018-07-16T09:12:11.354Z</lastmod>
+    <data>
+        <display>
+        <title>设计模式系列——工厂模式</title>
+        <pubTime>2018-07-16T08:28:53.000Z</pubTime>
+        
+        <tag>factory</tag>
+         
+         
+           
+             
+              <breadCrumb title="Design Pattern" url="https://yanglbme.github.io/categories/Design-Pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://yanglbme.github.io/2018/07/12/busy-week/</loc>
+    <lastmod>2018-07-16T07:47:51.612Z</lastmod>
+    <data>
+        <display>
+        <title>忙碌的一周</title>
+        <pubTime>2018-07-12T14:03:00.000Z</pubTime>
+        
+        <tag>interview</tag>
+         
+         
+           
+             
+              <breadCrumb title="Life" url="https://yanglbme.github.io/categories/Life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/07/16/cas/</loc>
     <lastmod>2018-07-16T02:41:25.303Z</lastmod>
     <data>
@@ -77,26 +117,6 @@
            
              
               <breadCrumb title="Concurrence" url="https://yanglbme.github.io/categories/Concurrence/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yanglbme.github.io/2018/07/12/busy-week/</loc>
-    <lastmod>2018-07-13T15:20:03.654Z</lastmod>
-    <data>
-        <display>
-        <title>忙碌的一周</title>
-        <pubTime>2018-07-12T14:03:00.000Z</pubTime>
-        
-        <tag>interview</tag>
-         
-         
-           
-             
-              <breadCrumb title="Life" url="https://yanglbme.github.io/categories/Life/"/>
           
         </display>
     </data>

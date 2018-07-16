@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="multi-thread, sequence," />
+  <meta name="keywords" content="factory," />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="前言多线程在并发环境中的正常执行顺序是随机无序的，为什么呢？因为启动多个线程时，线程并不会立即执行，而是等待 CPU 的资源调度，CPU 调度到哪个线程，这个线程就开始执行，因此，多线程运行具有随机性。 想让多线程的执行顺序变得可控，常见的有以下两种方式。">
-<meta name="keywords" content="multi-thread, sequence">
+<meta name="description" content="工厂模式，是根据“需求”生产“产品”，说点白就是“你要什么对象，从工厂拿就好了”。那么使用工厂的好处是什么😴？">
+<meta name="keywords" content="factory">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java 并发系列——控制多线程的执行顺序">
-<meta property="og:url" content="https://yanglbme.github.io/2018/07/13/multi-thread-execution-sequence/index.html">
+<meta property="og:title" content="设计模式系列——工厂模式">
+<meta property="og:url" content="https://yanglbme.github.io/2018/07/16/factory-pattern/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="前言多线程在并发环境中的正常执行顺序是随机无序的，为什么呢？因为启动多个线程时，线程并不会立即执行，而是等待 CPU 的资源调度，CPU 调度到哪个线程，这个线程就开始执行，因此，多线程运行具有随机性。 想让多线程的执行顺序变得可控，常见的有以下两种方式。">
+<meta property="og:description" content="工厂模式，是根据“需求”生产“产品”，说点白就是“你要什么对象，从工厂拿就好了”。那么使用工厂的好处是什么😴？">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-14T02:51:37.916Z">
+<meta property="og:updated_time" content="2018-07-16T09:12:11.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java 并发系列——控制多线程的执行顺序">
-<meta name="twitter:description" content="前言多线程在并发环境中的正常执行顺序是随机无序的，为什么呢？因为启动多个线程时，线程并不会立即执行，而是等待 CPU 的资源调度，CPU 调度到哪个线程，这个线程就开始执行，因此，多线程运行具有随机性。 想让多线程的执行顺序变得可控，常见的有以下两种方式。">
+<meta name="twitter:title" content="设计模式系列——工厂模式">
+<meta name="twitter:description" content="工厂模式，是根据“需求”生产“产品”，说点白就是“你要什么对象，从工厂拿就好了”。那么使用工厂的好处是什么😴？">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://yanglbme.github.io/2018/07/13/multi-thread-execution-sequence/"/>
+  <link rel="canonical" href="https://yanglbme.github.io/2018/07/16/factory-pattern/"/>
 
 
 
 
 
-  <title>Java 并发系列——控制多线程的执行顺序 | Bingo's Blog</title>
+  <title>设计模式系列——工厂模式 | Bingo's Blog</title>
   
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yanglbme.github.io/2018/07/13/multi-thread-execution-sequence/">
+    <link itemprop="mainEntityOfPage" href="https://yanglbme.github.io/2018/07/16/factory-pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bingo">
@@ -311,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java 并发系列——控制多线程的执行顺序</h1>
+          <h1 class="post-title" itemprop="name headline">设计模式系列——工厂模式</h1>
         
 
         <div class="post-meta">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T23:09:35+08:00">
-                2018-07-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T16:28:53+08:00">
+                2018-07-16
               </time>
             
 
@@ -346,8 +346,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Concurrence/" itemprop="url" rel="index">
-                    <span itemprop="name">Concurrence</span>
+                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">Design Pattern</span>
                   </a>
                 </span>
 
@@ -364,8 +364,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/13/multi-thread-execution-sequence/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/13/multi-thread-execution-sequence/" itemprop="commentsCount"></span>
+                <a href="/2018/07/16/factory-pattern/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/16/factory-pattern/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  588 word(s)
+                  162 word(s)
                 </span>
               
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3 min(s)
+                  1 min(s)
                 </span>
               
             </div>
@@ -424,13 +424,23 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>多线程在并发环境中的正常执行顺序是<strong>随机无序</strong>的，为什么呢？因为启动多个线程时，线程并不会立即执行，而是<strong>等待 CPU 的资源调度</strong>，CPU 调度到哪个线程，这个线程就开始执行，因此，多线程运行具有随机性。</p>
-<p>想让多线程的执行顺序变得可控，常见的有以下两种方式。<br><a id="more"></a></p>
-<h2 id="join-方法"><a href="#join-方法" class="headerlink" title="join() 方法"></a>join() 方法</h2><p>thread.join() 是把指定的线程加入到当前线程，它可以将两个交替执行的线程合并为顺序执行的线程。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadOrderTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> Thread t1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">		System.out.println(<span class="string">"Thread1"</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> Thread t2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">		System.out.println(<span class="string">"Thread2"</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> Thread t3 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">		System.out.println(<span class="string">"Thread3"</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">		t1.start();</span><br><span class="line">		t1.join();</span><br><span class="line">		</span><br><span class="line">		t2.start();</span><br><span class="line">		t2.join();</span><br><span class="line">		</span><br><span class="line">		t3.start();</span><br><span class="line">		t3.join();</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 程序打印结果：</span></span><br><span class="line"><span class="comment">		 * Thread1</span></span><br><span class="line"><span class="comment">		 * Thread2</span></span><br><span class="line"><span class="comment">		 * Thread3</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>join() 方法底层其实是通过调用线程的 wait() 方法来达到同步的目的。见下方<strong>源码</strong>：</p>
-<p>例如，主线程中调用了 t1 线程的 join() 方法，则相当于主线程调用了 t1 线程的 wait() 方法，在调用了 t1 线程的 wait() 方法后，主线程就会进入阻塞状态。当 t1 线程执行完（或者到达等待时间），t1 线程会自动调用自身的 notifyAll() 方法唤醒主线程，从而达到同步的目的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> base = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">long</span> now = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (millis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (millis == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (isAlive()) &#123;</span><br><span class="line">                wait(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (isAlive()) &#123;</span><br><span class="line">                <span class="keyword">long</span> delay = millis - now;</span><br><span class="line">                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                wait(delay);</span><br><span class="line">                now = System.currentTimeMillis() - base;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Executors-newSingleThreadExecutor"><a href="#Executors-newSingleThreadExecutor" class="headerlink" title="Executors.newSingleThreadExecutor()"></a>Executors.newSingleThreadExecutor()</h2><p>利用并发包里 Executors 的 <code>newSingleThreadExecutor()</code> 产生一个<strong>单线程的线程池</strong>，而这个线程池的底层原理就是一个<strong>先进先出</strong>（FIFO）的队列。代码中 <code>service.submit()</code>依次添加了 3 个线程，按照 FIFO 的特性，执行顺序也就是 Thread1.2.3 的执行结果。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadOrderTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		ExecutorService service = Executors.newSingleThreadExecutor();</span><br><span class="line">		service.submit(() -&gt; &#123;</span><br><span class="line">			System.out.println(<span class="string">"Thread1"</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">		service.submit(() -&gt; &#123;</span><br><span class="line">			System.out.println(<span class="string">"Thread2"</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">		service.submit(() -&gt; &#123;</span><br><span class="line">			System.out.println(<span class="string">"Thread3"</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		service.shutdown();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>工厂模式，是根据“需求”生产“产品”，说点白就是“你要什么对象，从工厂拿就好了”。那么使用工厂的好处是什么😴？<br><a id="more"></a></p>
+<p>在 Java 中，通常有以下几种创建对象的方式：</p>
+<ul>
+<li>使用 new 关键字直接创建对象</li>
+<li>通过反射机制创建对象</li>
+<li>通过 clone() 方法创建对象</li>
+<li>通过工厂类创建对象</li>
+</ul>
+<p>// to write sth here…</p>
+<p>根据业务场景的不同会有不同的实现方式。一般分为以下三种：</p>
+<ul>
+<li>简单工厂</li>
+<li>工厂</li>
+<li>抽象工厂</li>
+</ul>
+<p>这三种方式从简单到抽象，实现方式也是越来越复杂🤦‍。</p>
+
       
     </div>
     
@@ -447,7 +457,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/multi-thread-sequence/" rel="tag"># multi-thread, sequence</a>
+            <a href="/tags/factory/" rel="tag"># factory</a>
           
         </div>
       
@@ -460,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/12/busy-week/" rel="next" title="忙碌的一周">
-                <i class="fa fa-chevron-left"></i> 忙碌的一周
+              <a href="/2018/07/16/cas/" rel="next" title="Java 并发系列——CAS 操作">
+                <i class="fa fa-chevron-left"></i> Java 并发系列——CAS 操作
               </a>
             
           </div>
@@ -469,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/15/volatile/" rel="prev" title="Java 并发系列——深入 volatile 关键字">
-                Java 并发系列——深入 volatile 关键字 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,17 +537,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -621,22 +618,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-方法"><span class="nav-number">2.</span> <span class="nav-text">join() 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Executors-newSingleThreadExecutor"><span class="nav-number">3.</span> <span class="nav-text">Executors.newSingleThreadExecutor()</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
