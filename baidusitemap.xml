@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/07/17/observer-pattern/</loc>
+    <lastmod>2018-07-17T09:06:44.630Z</lastmod>
+    <data>
+        <display>
+        <title>设计模式系列——观察者模式</title>
+        <pubTime>2018-07-17T09:05:40.000Z</pubTime>
+        
+        <tag>observer</tag>
+         
+         
+           
+             
+              <breadCrumb title="Design Pattern" url="https://yanglbme.github.io/categories/Design-Pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/07/16/factory-pattern/</loc>
     <lastmod>2018-07-17T08:55:17.627Z</lastmod>
     <data>
