@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/07/18/decorator-pattern/</loc>
+    <lastmod>2018-07-18T11:52:43.198Z</lastmod>
+    <data>
+        <display>
+        <title>设计模式系列——装饰者模式</title>
+        <pubTime>2018-07-18T11:49:05.000Z</pubTime>
+        
+        <tag>decorator</tag>
+         
+         
+           
+             
+              <breadCrumb title="Design Pattern" url="https://yanglbme.github.io/categories/Design-Pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/07/17/observer-pattern/</loc>
     <lastmod>2018-07-18T09:07:31.949Z</lastmod>
     <data>
