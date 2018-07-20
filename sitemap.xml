@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yanglbme.github.io/2018/07/20/exception-and-error/</loc>
+    
+    <lastmod>2018-07-20T12:30:14.665Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yanglbme.github.io/2018/07/19/abstract-or-interface/</loc>
+    
+    <lastmod>2018-07-19T09:18:13.653Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yanglbme.github.io/2018/07/18/decorator-pattern/</loc>
     
     <lastmod>2018-07-18T11:52:43.198Z</lastmod>
