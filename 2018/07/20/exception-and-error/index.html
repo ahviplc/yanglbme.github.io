@@ -95,7 +95,7 @@
 <meta property="og:description" content="比较 Exception 与 ErrorException 和 Error 都继承了 Throwable 类，在 Java 中只有 Throwable 类型的实例才可以被 throw 或者 catch，它是异常处理机制的基本组成类型。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/java-throwable.png">
-<meta property="og:updated_time" content="2018-07-20T12:30:14.665Z">
+<meta property="og:updated_time" content="2018-07-21T02:15:54.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 异常处理篇">
 <meta name="twitter:description" content="比较 Exception 与 ErrorException 和 Error 都继承了 Throwable 类，在 Java 中只有 Throwable 类型的实例才可以被 throw 或者 catch，它是异常处理机制的基本组成类型。">
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  539 word(s)
+                  1,054 word(s)
                 </span>
               
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2 min(s)
+                  4 min(s)
                 </span>
               
             </div>
@@ -433,7 +433,21 @@
 <h2 id="区分-NoClassDefFoundError-和-ClassNotFoundException"><a href="#区分-NoClassDefFoundError-和-ClassNotFoundException" class="headerlink" title="区分 NoClassDefFoundError 和 ClassNotFoundException"></a>区分 NoClassDefFoundError 和 ClassNotFoundException</h2><p>NoClassDefFoundError 是一个 Error，而 ClassNotFoundException 是一个 Exception，在 Java 中对于 Error 和 Exception 的处理是不同的，我们可以从 Exception 中恢复程序但却不应该尝试从 Error 中恢复程序。</p>
 <h3 id="NoClassDefFoundError"><a href="#NoClassDefFoundError" class="headerlink" title="NoClassDefFoundError"></a>NoClassDefFoundError</h3><p>NoClassDefFoundError 错误的发生，是由于 JVM 在<strong>编译时能找到合适的类，而在运行时却不能找到合适的类导致的错误</strong>。例如在运行时我们想调用某个类的方法或者访问这个类的静态成员的时候，发现这个类不可用，此时 JVM 就会抛出 NoClassDefFoundError 错误。这个错误的发生是在<strong>运行时</strong>，发生该错误时，可以看到如下的错误日志：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread "main" java.lang.NoClassDefFoundError</span><br></pre></td></tr></table></figure></p>
 <p>造成该问题的原因可能是打包过程漏掉了部分类，或者 jar 包出现损坏或者篡改。解决这个问题的办法是<strong>查找</strong>那些在开发期间存在于类路径下但在运行期间却不在类路径下的类。</p>
-<h3 id="ClassNotFoundException"><a href="#ClassNotFoundException" class="headerlink" title="ClassNotFoundException"></a>ClassNotFoundException</h3><h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2>
+<h3 id="ClassNotFoundException"><a href="#ClassNotFoundException" class="headerlink" title="ClassNotFoundException"></a>ClassNotFoundException</h3><p>ClassNotFoundException 是编译时异常，就是在编译时找不到指定的 class。<br>常见的场景是</p>
+<ul>
+<li>调用 Class.forName() 方法时，找不到指定的类</li>
+<li>ClassLoader 中的 findSystemClass() 方法找不到指定的类</li>
+<li>ClassLoader 中的 loadClass() 方法找不到指定的类</li>
+</ul>
+<h2 id="异常处理基本原则"><a href="#异常处理基本原则" class="headerlink" title="异常处理基本原则"></a>异常处理基本原则</h2><p>看下面这段代码，看它的异常处理是否有不当之处？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 业务代码</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// Ignore it.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上代码违背了异常处理的两个原则。👇</p>
+<h3 id="尽量不捕获类似-Exception-的通用异常"><a href="#尽量不捕获类似-Exception-的通用异常" class="headerlink" title="尽量不捕获类似 Exception 的通用异常"></a>尽量不捕获类似 Exception 的通用异常</h3><p>在日常开发中，我们有义务让自己的代码能够直观地体现出尽量多的信息，而泛泛的 Exception，恰恰隐藏了我们的目的。</p>
+<p>进一步讲，除非经过深思熟虑，否则不要捕获 Throwable 或者 Error，这样很难保证程序正确处理 OutOfMemoryError。</p>
+<h3 id="不要生吞异常"><a href="#不要生吞异常" class="headerlink" title="不要生吞异常"></a>不要生吞异常</h3><p>生吞异常，往往是基于假设这段代码可能不会发生，或者感觉忽略异常是无所谓的，但是千万不要在产品代码做这种假设！</p>
+<p>如果我们不把异常抛出来，或者也没有输出到日志<code>Logger</code>之类，程序可能在后续代码以不可控的方式结束。没人能够轻易判断究竟是哪里抛出了异常，以及是什么原因产生了异常。</p>
+<h2 id="异常性能开销"><a href="#异常性能开销" class="headerlink" title="异常性能开销"></a>异常性能开销</h2><p><code>try-catch</code> 代码段会产生<strong>额外的性能开销</strong>，或者换个角度说，它往往会影响 JVM 对代码进行优化，所以建议仅捕获有必要的代码段，尽量不要一个大的 <code>try</code> 包住整段的代码；与此同时，利用异常控制代码流程，也不是一个好主意，远比我们通常意义上的条件语句<code>if/else、switch</code>要低效。</p>
+<p>另外，Java 每实例化一个 Exception，都会对当时的<strong>栈</strong>进行<strong>快照</strong>，这是一个相对比较重的操作。如果发生非常频繁，这个开销就不能被忽略了。</p>
+
       
     </div>
     
@@ -632,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#比较-Exception-与-Error"><span class="nav-number">1.</span> <span class="nav-text">比较 Exception 与 Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区分-NoClassDefFoundError-和-ClassNotFoundException"><span class="nav-number">2.</span> <span class="nav-text">区分 NoClassDefFoundError 和 ClassNotFoundException</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NoClassDefFoundError"><span class="nav-number">2.1.</span> <span class="nav-text">NoClassDefFoundError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassNotFoundException"><span class="nav-number">2.2.</span> <span class="nav-text">ClassNotFoundException</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义异常"><span class="nav-number">3.</span> <span class="nav-text">自定义异常</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#比较-Exception-与-Error"><span class="nav-number">1.</span> <span class="nav-text">比较 Exception 与 Error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区分-NoClassDefFoundError-和-ClassNotFoundException"><span class="nav-number">2.</span> <span class="nav-text">区分 NoClassDefFoundError 和 ClassNotFoundException</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NoClassDefFoundError"><span class="nav-number">2.1.</span> <span class="nav-text">NoClassDefFoundError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassNotFoundException"><span class="nav-number">2.2.</span> <span class="nav-text">ClassNotFoundException</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理基本原则"><span class="nav-number">3.</span> <span class="nav-text">异常处理基本原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量不捕获类似-Exception-的通用异常"><span class="nav-number">3.1.</span> <span class="nav-text">尽量不捕获类似 Exception 的通用异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要生吞异常"><span class="nav-number">3.2.</span> <span class="nav-text">不要生吞异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常性能开销"><span class="nav-number">4.</span> <span class="nav-text">异常性能开销</span></a></li></ol></div>
             
 
           </div>
