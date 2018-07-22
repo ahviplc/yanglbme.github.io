@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="str," />
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="A Web Developer, major in Java.">
-<meta name="keywords" content="Blog, 博客, 技术, 生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bingo&#39;s Blog">
-<meta property="og:url" content="https://yanglbme.github.io/archives/2018/page/3/index.html">
+<meta name="description" content="字符串是 Java 语言非常重要的组成部分，面试中也经常被问到，所以有必要对 Java 字符串相关知识做个总结。">
+<meta name="keywords" content="str">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解 Java String&#x2F;StringBuffer&#x2F;StringBuilder">
+<meta property="og:url" content="https://yanglbme.github.io/2018/07/21/String-StringBuffer-StringBuilder/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="A Web Developer, major in Java.">
+<meta property="og:description" content="字符串是 Java 语言非常重要的组成部分，面试中也经常被问到，所以有必要对 Java 字符串相关知识做个总结。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-21T09:13:57.374Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bingo&#39;s Blog">
-<meta name="twitter:description" content="A Web Developer, major in Java.">
+<meta name="twitter:title" content="深入理解 Java String&#x2F;StringBuffer&#x2F;StringBuilder">
+<meta name="twitter:description" content="字符串是 Java 语言非常重要的组成部分，面试中也经常被问到，所以有必要对 Java 字符串相关知识做个总结。">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://yanglbme.github.io/archives/2018/page/3/"/>
+  <link rel="canonical" href="https://yanglbme.github.io/2018/07/21/String-StringBuffer-StringBuilder/"/>
 
 
 
 
 
-  <title>Archive | Bingo's Blog</title>
+  <title>深入理解 Java String/StringBuffer/StringBuilder | Bingo's Blog</title>
   
 
 
@@ -151,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,115 +280,231 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 22 posts in total. Keep on posting.
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yanglbme.github.io/2018/07/21/String-StringBuffer-StringBuilder/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bingo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bingo's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/28/Goodbye-Germany/" itemprop="url">
-              
-                <span itemprop="name">再见，德国</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">深入理解 Java String/StringBuffer/StringBuilder</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-28T00:12:46+08:00"
-              content="2018-06-28" >
-          06-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-21T16:33:01+08:00">
+                2018-07-21
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dev/" itemprop="url" rel="index">
+                    <span itemprop="name">Dev</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/21/String-StringBuffer-StringBuilder/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/21/String-StringBuffer-StringBuilder/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,168 word(s)
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4 min(s)
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/06/27/Just-Do-IT/" itemprop="url">
-              
-                <span itemprop="name">Just Do IT</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-27T21:14:07+08:00"
-              content="2018-06-27" >
-          06-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>字符串是 Java 语言非常重要的组成部分，面试中也经常被问到，所以有必要对 Java 字符串相关知识做个总结。</p>
+<a id="more"></a>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String 是典型的 <code>Immutable</code>类，被声明为 <code>final class</code>，所有属性也都是 <code>final</code> 的。由于它的不可变性，类似拼接、裁剪字符串等动作，都会产生新的 String 对象。</p>
+<p>那么，<strong>为什么</strong>要把 String 设计成不可变的？Emmmm…其实有以下几个原因。👇</p>
+<ul>
+<li><p>线程安全<br>由于字符串不可变，所以是线程安全的。同一个字符串实例可以被多个线程共享。这样就不必因为线程安全问题而使用同步。</p>
+</li>
+<li><p>便于实现 String 常量池</p>
+</li>
+</ul>
+<p>(1) String 的创建机理<br>由于String在Java世界中使用过于频繁，Java为了避免在一个系统中产生大量的String对象，引入了字符串常量池。其运行机制是：创建一个字符串时，首先检查池中是否有值相同的字符串对象，如果有则不需要创建直接从池中刚查找到的对象引用；如果没有则新建字符串对象，返回对象引用，并且将新创建的对象放入池中。但是，通过new方法创建的String对象是不检查字符串池的，而是直接在堆区或栈区创建一个新的对象，也不会把对象放入池中。上述原则只适用于通过直接量给String对象引用赋值的情况。</p>
+<p>举例：String str1 = “123”; //通过直接量赋值方式，放入字符串常量池<br>String str2 = new String(“123”);//通过new方式赋值方式，不放入字符串常量池</p>
+<p>注意：String提供了inter()方法。调用该方法时，如果常量池中包括了一个等于此String对象的字符串（由equals方法确定），则返回池中的字符串。否则，将此String对象添加到池中，并且返回此池中对象的引用。</p>
+<p>(2) String的特性<br>[A] 不可变。是指String对象一旦生成，则不能再对它进行改变。不可变的主要作用在于当一个对象需要被多线程共享，并且访问频繁时，可以省略同步和锁等待的时间，从而大幅度提高系统性能。不可变模式是一个可以提高多线程程序的性能，降低多线程程序复杂度的设计模式。</p>
+<p>[B] 针对常量池的优化。当2个String对象拥有相同的值时，他们只引用常量池中的同一个拷贝。当同一个字符串反复出现时，这个技术可以大幅度节省内存空间。</p>
+<p>2 StringBuffer/StringBuilder</p>
+<p>StringBuffer和StringBuilder都实现了AbstractStringBuilder抽象类，拥有几乎一致对外提供的调用接口；其底层在内存中的存储方式与String相同，都是以一个有序的字符序列（char类型的数组）进行存储，不同点是StringBuffer/StringBuilder对象的值是可以改变的，并且值改变以后，对象引用不会发生改变;两者对象在构造过程中，首先按照默认大小申请一个字符数组，由于会不断加入新数据，当超过默认大小后，会创建一个更大的数组，并将原先的数组内容复制过来，再丢弃旧的数组。因此，对于较大对象的扩容会涉及大量的内存复制操作，如果能够预先评估大小，可提升性能。</p>
+<p>唯一需要注意的是：StringBuffer是线程安全的，但是StringBuilder是线程不安全的。可参看Java标准类库的源代码，StringBuffer类中方法定义前面都会有synchronize关键字。为此，StringBuffer的性能要远低于StringBuilder。</p>
+<p>3 应用场景    </p>
+<p>[A]在字符串内容不经常发生变化的业务场景优先使用String类。例如：常量声明、少量的字符串拼接操作等。如果有大量的字符串内容拼接，避免使用String与String之间的“+”操作，因为这样会产生大量无用的中间对象，耗费空间且执行效率低下（新建对象、回收对象花费大量时间）。</p>
+<p>[B]在频繁进行字符串的运算（如拼接、替换、删除等），并且运行在多线程环境下，建议使用StringBuffer，例如XML解析、HTTP参数解析与封装。</p>
+<p>[C]在频繁进行字符串的运算（如拼接、替换、删除等），并且运行在单线程环境下，建议使用StringBuilder，例如SQL语句拼装、JSON封装等。</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/str/" rel="tag"># str</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/20/exception-and-error/" rel="next" title="Java 异常处理篇">
+                <i class="fa fa-chevron-left"></i> Java 异常处理篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><a class="page-number" href="/archives/2018/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -395,6 +512,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -415,8 +543,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -496,6 +633,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">1.</span> <span class="nav-text">String</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -650,6 +803,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -701,6 +858,30 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yanglbme',
+            repo: 'yanglbme.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '36d5852db7f3d0923ec690515a387664a6781c32',
+            
+                client_id: 'a54a1603960fac287d58'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 
