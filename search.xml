@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[说点什么吧]]></title>
+    <url>%2F2018%2F07%2F26%2Fsay-something%2F</url>
+    <content type="text"><![CDATA[明后两天公司组织安排实习生参加团拓，地点是“深圳大鹏”，所以…我的博客可能会暂时性断更😭。之后我会尽量把以前没写完整的文章都补全。 下周就正式投入实习工作了。今天下午杰哥（当时一面的面试官）已经给我发了项目的源码，让我先部署，为下周工作做准备。 接下来还有太多的事情要做，心中有数，给自己加加油💪~]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>talk</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[深入理解 Java Hashtable/HashMap/TreeMap]]></title>
     <url>%2F2018%2F07%2F25%2FHashtable-HashMap-TreeMap%2F</url>
     <content type="text"></content>
@@ -8,8 +19,8 @@
         <category>Dev</category>
       </categories>
       <tags>
-        <tag>hashmap</tag>
         <tag>hashtable</tag>
+        <tag>hashmap</tag>
         <tag>treemap</tag>
       </tags>
   </entry>

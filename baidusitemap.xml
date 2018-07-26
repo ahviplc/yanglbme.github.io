@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/07/26/say-something/</loc>
+    <lastmod>2018-07-26T14:23:46.087Z</lastmod>
+    <data>
+        <display>
+        <title>说点什么吧</title>
+        <pubTime>2018-07-26T13:58:18.000Z</pubTime>
+        
+        <tag>talk</tag>
+         
+         
+           
+             
+              <breadCrumb title="Life" url="https://yanglbme.github.io/categories/Life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/07/25/Hashtable-HashMap-TreeMap/</loc>
     <lastmod>2018-07-25T15:17:30.430Z</lastmod>
     <data>
@@ -11,9 +31,9 @@
         <title>深入理解 Java Hashtable/HashMap/TreeMap</title>
         <pubTime>2018-07-25T15:06:20.000Z</pubTime>
         
-        <tag>hashmap</tag>
-         
         <tag>hashtable</tag>
+         
+        <tag>hashmap</tag>
          
         <tag>treemap</tag>
          
