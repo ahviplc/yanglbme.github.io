@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/concurrency-parallelism.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/critical-area-new.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/concurrency-level.png">
-<meta property="og:updated_time" content="2018-09-02T13:53:21.569Z">
+<meta property="og:updated_time" content="2018-09-02T14:08:31.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 并发程序设计 01 ——基本概念">
 <meta name="twitter:description" content="本系列知识点总结自葛一鸣老师的《实战 Java 高并发程序设计》一书，若想深入学习可以阅读全书。  几个重要的概念同步(Synchronous)和异步(Asynchronous)同步和异步通常用来形容一次方法调用。  同步方法调用：一旦开始，调用者必须等到方法调用返回后，才能继续后续行为。 异步方法调用：一旦开始，方法调用会立即返回，调用者就可以继续后续的操作，异步方法通常会在另一个线程中执行。">
@@ -436,8 +436,9 @@
 <ul>
 <li><strong>同步</strong>方法调用：一旦开始，调用者必须等到方法调用返回后，才能继续后续行为。</li>
 <li><strong>异步</strong>方法调用：一旦开始，方法调用会立即返回，调用者就可以继续后续的操作，异步方法通常会在<strong>另一个线程</strong>中执行。整个过程，不会阻碍调用者的工作。如果异步调用需要返回结果，那么当这个异步调用真正完成时，则会通知调用者。<a id="more"></a>
-<img src="http://p9ucdlghd.bkt.clouddn.com/syn-async.png" alt="syn-async"></li>
+</li>
 </ul>
+<p><img src="http://p9ucdlghd.bkt.clouddn.com/syn-async.png" alt="syn-async"></p>
 <h3 id="并发-Concurrency-和并行-Parallelism"><a href="#并发-Concurrency-和并行-Parallelism" class="headerlink" title="并发(Concurrency)和并行(Parallelism)"></a>并发(Concurrency)和并行(Parallelism)</h3><p>并发是多个任务交替执行，是串行化状态。而并行是真正的多任务同时执行。<br><img src="http://p9ucdlghd.bkt.clouddn.com/concurrency-parallelism.png" alt="concurrency-parallelism"></p>
 <h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>临界区用来表示一种公共资源或者说是共享数据，可以被多个线程使用。但是每次只能有一个线程使用它，一旦临界区资源被占用，其他线程要想使用这个资源，就必须等待。<br><img src="http://p9ucdlghd.bkt.clouddn.com/critical-area-new.png" alt="critical-area"></p>
 <h3 id="阻塞-Blocking-和非阻塞-Non-Blocking"><a href="#阻塞-Blocking-和非阻塞-Non-Blocking" class="headerlink" title="阻塞(Blocking)和非阻塞(Non-Blocking)"></a>阻塞(Blocking)和非阻塞(Non-Blocking)</h3><p>阻塞和非阻塞通常用来形容多线程间的相互影响。<strong>阻塞</strong>是说一个线程占用了临界区资源，那么其他所有需要该资源的线程就必须进行等待，等待会导致线程挂起。如果占用资源的线程一直没有释放资源，那么其他所有阻塞在这个临界区上的线程都不能工作。<strong>非阻塞</strong>强调没有一个线程可以妨碍其他线程执行。所有的线程都会尝试不断前向执行。</p>
@@ -490,6 +491,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/02/more-basic-concurrency/" rel="prev" title="Java 并发程序设计 02 ——并发基础">
+                Java 并发程序设计 02 ——并发基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -577,7 +582,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
