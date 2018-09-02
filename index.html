@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  18 word(s)
+                  792 word(s)
                 </span>
               
 
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  3 min(s)
                 </span>
               
             </div>
@@ -417,7 +417,13 @@
 
       
         
-          <h2 id="几个重要的概念"><a href="#几个重要的概念" class="headerlink" title="几个重要的概念"></a>几个重要的概念</h2>
+          <blockquote>
+<p>本系列知识点总结自葛一鸣老师的《实战 Java 高并发程序设计》一书，若想深入学习可以阅读<a href="http://paver62xl.bkt.clouddn.com/%E5%AE%9E%E6%88%98Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.pdf" target="_blank" rel="noopener">全书</a>。</p>
+</blockquote>
+<h2 id="几个重要的概念"><a href="#几个重要的概念" class="headerlink" title="几个重要的概念"></a>几个重要的概念</h2><h3 id="同步-Synchronous-和异步-Asynchronous"><a href="#同步-Synchronous-和异步-Asynchronous" class="headerlink" title="同步(Synchronous)和异步(Asynchronous)"></a>同步(Synchronous)和异步(Asynchronous)</h3><p>同步和异步通常用来形容一次方法调用。</p>
+<ul>
+<li><strong>同步</strong>方法调用：一旦开始，调用者必须等到方法调用返回后，才能继续后续行为。</li>
+<li><strong>异步</strong>方法调用：一旦开始，方法调用会立即返回，调用者就可以继续后续的操作，异步方法通常会在<strong>另一个线程</strong>中执行。整个过程，不会阻碍调用者的工作。如果异步调用需要返回结果，那么当这个异步调用真正完成时，则会通知调用者。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/09/02/basic-concurrency/#more" rel="contents">
