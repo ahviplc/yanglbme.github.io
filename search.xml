@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java 并发程序设计 01 ——基本概念]]></title>
+    <url>%2F2018%2F09%2F02%2Fbasic-concurrency%2F</url>
+    <content type="text"><![CDATA[几个重要的概念 有关并行的 2 个重要定律]]></content>
+      <categories>
+        <category>Concurrence</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Java 8 实战系列——Java 8 初探]]></title>
     <url>%2F2018%2F08%2F06%2Fjava8-in-action-hello-world%2F</url>
     <content type="text"></content>
