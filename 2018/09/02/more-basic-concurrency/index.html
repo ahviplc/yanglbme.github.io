@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="占个坑…">
+<meta name="description" content="什么是线程线程是进程内的执行单元，是程序执行的最小单位。使用多线程而不是多进程进行并发程序设计，是因为线程间的切换和调度的成本远远小于进程。">
 <meta name="keywords" content="Blog, 博客, 技术, 生活">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 并发程序设计 02 ——并发基础">
 <meta property="og:url" content="https://yanglbme.github.io/2018/09/02/more-basic-concurrency/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="占个坑…">
+<meta property="og:description" content="什么是线程线程是进程内的执行单元，是程序执行的最小单位。使用多线程而不是多进程进行并发程序设计，是因为线程间的切换和调度的成本远远小于进程。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-02T14:27:09.219Z">
+<meta property="og:updated_time" content="2018-09-03T14:50:13.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 并发程序设计 02 ——并发基础">
-<meta name="twitter:description" content="占个坑…">
+<meta name="twitter:description" content="什么是线程线程是进程内的执行单元，是程序执行的最小单位。使用多线程而不是多进程进行并发程序设计，是因为线程间的切换和调度的成本远远小于进程。">
 
 
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3 word(s)
+                  404 word(s)
                 </span>
               
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  2 min(s)
                 </span>
               
             </div>
@@ -424,8 +424,23 @@
       
 
       
-        <p>占个坑…</p>
-
+        <h2 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>线程是进程内的执行单元，是程序执行的最小单位。使用多线程而不是多进程进行并发程序设计，是因为线程间的切换和调度的成本远远小于进程。</p>
+<a id="more"></a>
+<p>线程的所有状态都在 Thread 中的 State 枚举中定义，如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">    NEW,</span><br><span class="line">    RUNNABLE,</span><br><span class="line">    BLOCKED,</span><br><span class="line">    WAITING,</span><br><span class="line">    TIMED_WAITING,</span><br><span class="line">    TERMINATED;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>NEW：表示刚刚创建的线程</li>
+<li>RUNNABLE：表示线程一切资源准备好了</li>
+<li>BLOCKED：线程执行过程中遇到 synchronized</li>
+<li>WAITING：无限时等待</li>
+<li>TIMED_WAITING：有限等待</li>
+<li>TERMINATED：线程执行完毕</li>
+</ul>
+<h2 id="线程的基本操作"><a href="#线程的基本操作" class="headerlink" title="线程的基本操作"></a>线程的基本操作</h2><h3 id="新建线程"><a href="#新建线程" class="headerlink" title="新建线程"></a>新建线程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t1 = <span class="keyword">new</span> Thread();</span><br><span class="line">t1.start();</span><br></pre></td></tr></table></figure>
+<p>start() 方法会新建一个线程并让这个线程执行 run() 方法。如果认为调用了 run() 方法，将只作为一个普通方法调用，不会开启新线程。</p>
+<p>默认情况下，Thread 中的 run() 方法什么都没做，因此这个线程一启动就马上结束了。如果想让线程做点什么，就必须重写 run() 方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread t1 = <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello, bingo"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上是用匿名内部类的方式，通过继承 Thread，并重写 run() 方法来自定义线程。<br>也可以使用 Runnable 接口来实现同样的操作。Thread 类中有一个构造方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(Runnable target)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>它传入 Runnable 接口的实例target, 赋给 Thread 中的 target 成员，在 start() 方法调用时，新线程会调用 target.run()：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (target != <span class="keyword">null</span>) &#123;</span><br><span class="line">        target.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="终止线程"><a href="#终止线程" class="headerlink" title="终止线程"></a>终止线程</h3>
       
     </div>
     
@@ -516,8 +531,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -597,6 +621,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是线程"><span class="nav-number">1.</span> <span class="nav-text">什么是线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的基本操作"><span class="nav-number">2.</span> <span class="nav-text">线程的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建线程"><span class="nav-number">2.1.</span> <span class="nav-text">新建线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止线程"><span class="nav-number">2.2.</span> <span class="nav-text">终止线程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Java 并发程序设计 02 ——并发基础]]></title>
     <url>%2F2018%2F09%2F02%2Fmore-basic-concurrency%2F</url>
-    <content type="text"><![CDATA[占个坑…]]></content>
+    <content type="text"><![CDATA[什么是线程线程是进程内的执行单元，是程序执行的最小单位。使用多线程而不是多进程进行并发程序设计，是因为线程间的切换和调度的成本远远小于进程。 线程的所有状态都在 Thread 中的 State 枚举中定义，如下所示：12345678public enum State &#123; NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED;&#125; NEW：表示刚刚创建的线程 RUNNABLE：表示线程一切资源准备好了 BLOCKED：线程执行过程中遇到 synchronized WAITING：无限时等待 TIMED_WAITING：有限等待 TERMINATED：线程执行完毕 线程的基本操作新建线程12Thread t1 = new Thread();t1.start(); start() 方法会新建一个线程并让这个线程执行 run() 方法。如果认为调用了 run() 方法，将只作为一个普通方法调用，不会开启新线程。 默认情况下，Thread 中的 run() 方法什么都没做，因此这个线程一启动就马上结束了。如果想让线程做点什么，就必须重写 run() 方法。123456Thread t1 = new Thread() &#123; @Override public void run() &#123; System.out.println("Hello, bingo"); &#125;&#125; 以上是用匿名内部类的方式，通过继承 Thread，并重写 run() 方法来自定义线程。也可以使用 Runnable 接口来实现同样的操作。Thread 类中有一个构造方法：1public Thread(Runnable target) 它传入 Runnable 接口的实例target, 赋给 Thread 中的 target 成员，在 start() 方法调用时，新线程会调用 target.run()：12345public void run() &#123; if (target != null) &#123; target.run(); &#125;&#125; 终止线程]]></content>
       <categories>
         <category>Concurrence</category>
       </categories>
