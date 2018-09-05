@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/</loc>
+    
+    <lastmod>2018-09-05T15:26:53.212Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yanglbme.github.io/2018/09/02/more-basic-concurrency/</loc>
     
     <lastmod>2018-09-05T15:15:15.419Z</lastmod>

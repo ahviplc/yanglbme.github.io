@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="plan," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="复习计划 JVM Java Web Spring MyBatis 设计模式">
-<meta name="keywords" content="plan">
+<meta name="description" content="本系列知识点总结自葛一鸣老师《实战 Java 高并发程序设计》一书，若想深入学习可以阅读全书。">
+<meta name="keywords" content="Blog, 博客, 技术, 生活">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Just Do IT">
-<meta property="og:url" content="https://yanglbme.github.io/2018/06/27/Just-Do-IT/index.html">
+<meta property="og:title" content="Java 并发程序设计 03 ——Java 内存模型和线程安全">
+<meta property="og:url" content="https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/index.html">
 <meta property="og:site_name" content="Bingo&#39;s Blog">
-<meta property="og:description" content="复习计划 JVM Java Web Spring MyBatis 设计模式">
+<meta property="og:description" content="本系列知识点总结自葛一鸣老师《实战 Java 高并发程序设计》一书，若想深入学习可以阅读全书。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-11T11:17:39.749Z">
+<meta property="og:updated_time" content="2018-09-05T15:26:53.212Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Just Do IT">
-<meta name="twitter:description" content="复习计划 JVM Java Web Spring MyBatis 设计模式">
+<meta name="twitter:title" content="Java 并发程序设计 03 ——Java 内存模型和线程安全">
+<meta name="twitter:description" content="本系列知识点总结自葛一鸣老师《实战 Java 高并发程序设计》一书，若想深入学习可以阅读全书。">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://yanglbme.github.io/2018/06/27/Just-Do-IT/"/>
+  <link rel="canonical" href="https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/"/>
 
 
 
 
 
-  <title>Just Do IT | Bingo's Blog</title>
+  <title>Java 并发程序设计 03 ——Java 内存模型和线程安全 | Bingo's Blog</title>
   
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yanglbme.github.io/2018/06/27/Just-Do-IT/">
+    <link itemprop="mainEntityOfPage" href="https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bingo">
@@ -311,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Just Do IT</h1>
+          <h1 class="post-title" itemprop="name headline">Java 并发程序设计 03 ——Java 内存模型和线程安全</h1>
         
 
         <div class="post-meta">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-27T21:14:07+08:00">
-                2018-06-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-05T23:24:53+08:00">
+                2018-09-05
               </time>
             
 
@@ -346,8 +346,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Dev/" itemprop="url" rel="index">
-                    <span itemprop="name">Dev</span>
+                  <a href="/categories/Concurrence/" itemprop="url" rel="index">
+                    <span itemprop="name">Concurrence</span>
                   </a>
                 </span>
 
@@ -364,8 +364,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/27/Just-Do-IT/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/06/27/Just-Do-IT/" itemprop="commentsCount"></span>
+                <a href="/2018/09/05/jmm-and-thread-safe/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/09/05/jmm-and-thread-safe/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  87 word(s)
+                  38 word(s)
                 </span>
               
 
@@ -424,22 +424,10 @@
       
 
       
-        <h2 id="复习计划"><a href="#复习计划" class="headerlink" title="复习计划"></a>复习计划</h2><ul>
-<li>JVM</li>
-<li>Java Web</li>
-<li>Spring</li>
-<li>MyBatis</li>
-<li>设计模式<a id="more"></a></li>
-<li>操作系统</li>
-<li>数据库</li>
-<li>计算机网络</li>
-<li>数据结构与算法</li>
-<li>Java 基础</li>
-<li>Java 并发</li>
-<li>Java 容器</li>
-<li>Java IO</li>
-</ul>
-<h2 id="查漏补缺"><a href="#查漏补缺" class="headerlink" title="查漏补缺"></a>查漏补缺</h2><p>数据库索引、优化、引擎<br>HashMap 底层源码<br>网络协议（TCP为什么 3 次握手; HTTP）<br>设计模式（23种！都要过关，待总结）</p>
+        <blockquote>
+<p>本系列知识点总结自葛一鸣老师《实战 Java 高并发程序设计》一书，若想深入学习可以阅读<a href="http://paver62xl.bkt.clouddn.com/%E5%AE%9E%E6%88%98Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.pdf" target="_blank" rel="noopener">全书</a>。</p>
+</blockquote>
+<a id="more"></a>
 
       
     </div>
@@ -455,12 +443,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/plan/" rel="tag"># plan</a>
-          
-        </div>
-      
 
       
       
@@ -470,15 +452,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/09/02/more-basic-concurrency/" rel="next" title="Java 并发程序设计 02 ——并发基础">
+                <i class="fa fa-chevron-left"></i> Java 并发程序设计 02 ——并发基础
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/28/Goodbye-Germany/" rel="prev" title="再见，德国">
-                再见，德国 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,17 +519,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -627,22 +600,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#复习计划"><span class="nav-number">1.</span> <span class="nav-text">复习计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查漏补缺"><span class="nav-number">2.</span> <span class="nav-text">查漏补缺</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
