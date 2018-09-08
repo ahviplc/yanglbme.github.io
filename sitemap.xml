@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yanglbme.github.io/2018/09/08/jdk-concurrent-package/</loc>
+    
+    <lastmod>2018-09-08T07:32:48.548Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/</loc>
     
-    <lastmod>2018-09-06T14:52:35.201Z</lastmod>
+    <lastmod>2018-09-06T15:11:26.220Z</lastmod>
     
   </url>
   
