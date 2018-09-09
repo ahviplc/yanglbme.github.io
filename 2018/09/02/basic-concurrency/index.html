@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/concurrency-parallelism.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/critical-area-new.png">
 <meta property="og:image" content="http://p9ucdlghd.bkt.clouddn.com/concurrency-level.png">
-<meta property="og:updated_time" content="2018-09-03T16:01:45.437Z">
+<meta property="og:updated_time" content="2018-09-09T02:06:41.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 并发程序设计 01 ——基本概念">
 <meta name="twitter:description" content="本系列知识点总结自葛一鸣老师《实战 Java 高并发程序设计》一书，若想深入学习可以阅读全书。  几个重要的概念同步(Synchronous)和异步(Asynchronous)同步和异步通常用来形容一次方法调用。  同步方法调用：一旦开始，调用者必须等到方法调用返回后，才能继续后续行为。 异步方法调用：一旦开始，方法调用会立即返回，调用者就可以继续后续的操作，异步方法通常会在另一个线程中执行。整">
@@ -456,7 +456,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">加速比 = T1 / Tn </span><br><span class="line">       = T1 / (T1 * (F + 1 / n * (1 - F))) </span><br><span class="line">       = 1 / (F + 1 / n * (1 - F))</span><br></pre></td></tr></table></figure>
 <p>根据这个公式，如果 CPU 处理器数量趋于无穷，那么加速比与系统的串行化率成反比。</p>
 <h3 id="Gustafson-定律"><a href="#Gustafson-定律" class="headerlink" title="Gustafson 定律"></a>Gustafson 定律</h3><p>a：串行时间<br>b：并行时间<br>执行时间：a + b<br>总执行时间：a + n * b<br>F：串行比例 a / (a + b)<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">加速比 = (a + n * b) / (a + b)</span><br><span class="line">        = a / (a + b) + n * b / (a + b)</span><br><span class="line">        = F + n * (1 - a / (a + b))</span><br><span class="line">        = F + n * (1 - F)</span><br><span class="line">        = F + n - n * F</span><br><span class="line">        = n - F * (n - 1)</span><br></pre></td></tr></table></figure></p>
-<p>如果串行化比例很小，并行比例很大，那么加速器就是处理器的个数。只要不断累加处理器，就能获得更快的速度。</p>
+<p>如果串行化比例很小，并行比例很大，那么加速比就是处理器的个数。只要不断累加处理器，就能获得更快的速度。</p>
 <p>（完）</p>
 
       
