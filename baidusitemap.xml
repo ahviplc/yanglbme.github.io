@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/09/02/more-basic-concurrency/</loc>
+    <lastmod>2018-09-09T12:55:56.405Z</lastmod>
+    <data>
+        <display>
+        <title>Java 并发程序设计 02 ——并发基础</title>
+        <pubTime>2018-09-02T14:24:15.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Concurrence" url="https://yanglbme.github.io/categories/Concurrence/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/</loc>
-    <lastmod>2018-09-09T02:44:28.132Z</lastmod>
+    <lastmod>2018-09-09T07:30:04.583Z</lastmod>
     <data>
         <display>
         <title>Java 并发程序设计 03 ——Java 内存模型和线程安全</title>
@@ -46,24 +64,6 @@
         <display>
         <title>Java 并发程序设计 04 ——JDK 并发包</title>
         <pubTime>2018-09-08T07:27:15.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Concurrence" url="https://yanglbme.github.io/categories/Concurrence/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yanglbme.github.io/2018/09/02/more-basic-concurrency/</loc>
-    <lastmod>2018-09-05T15:15:15.419Z</lastmod>
-    <data>
-        <display>
-        <title>Java 并发程序设计 02 ——并发基础</title>
-        <pubTime>2018-09-02T14:24:15.000Z</pubTime>
         
          
            
