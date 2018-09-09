@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>https://yanglbme.github.io/2018/09/08/jdk-concurrent-package/</loc>
+    <lastmod>2018-09-09T15:46:04.892Z</lastmod>
+    <data>
+        <display>
+        <title>Java 并发程序设计 04 ——JDK 并发包</title>
+        <pubTime>2018-09-08T07:27:15.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Concurrence" url="https://yanglbme.github.io/categories/Concurrence/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/</loc>
     <lastmod>2018-09-09T14:14:48.991Z</lastmod>
     <data>
@@ -46,24 +64,6 @@
         <display>
         <title>Java 并发程序设计 01 ——基本概念</title>
         <pubTime>2018-09-02T05:47:25.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Concurrence" url="https://yanglbme.github.io/categories/Concurrence/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://yanglbme.github.io/2018/09/08/jdk-concurrent-package/</loc>
-    <lastmod>2018-09-08T11:46:52.138Z</lastmod>
-    <data>
-        <display>
-        <title>Java 并发程序设计 04 ——JDK 并发包</title>
-        <pubTime>2018-09-08T07:27:15.000Z</pubTime>
         
          
            

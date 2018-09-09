@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yanglbme.github.io/2018/09/08/jdk-concurrent-package/</loc>
+    
+    <lastmod>2018-09-09T15:46:04.892Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yanglbme.github.io/2018/09/05/jmm-and-thread-safe/</loc>
     
     <lastmod>2018-09-09T14:14:48.991Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://yanglbme.github.io/2018/09/02/basic-concurrency/</loc>
     
     <lastmod>2018-09-09T02:06:41.335Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yanglbme.github.io/2018/09/08/jdk-concurrent-package/</loc>
-    
-    <lastmod>2018-09-08T11:46:52.138Z</lastmod>
     
   </url>
   

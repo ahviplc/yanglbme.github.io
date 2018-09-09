@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  38 word(s)
+                  758 word(s)
                 </span>
               
 
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 min(s)
+                  3 min(s)
                 </span>
               
             </div>
@@ -420,6 +420,7 @@
           <blockquote>
 <p>本系列知识点总结自葛一鸣老师《实战 Java 高并发程序设计》一书，若想深入学习可以阅读<a href="http://paver62xl.bkt.clouddn.com/%E5%AE%9E%E6%88%98Java%E9%AB%98%E5%B9%B6%E5%8F%91%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1.pdf" target="_blank" rel="noopener">全书</a>。</p>
 </blockquote>
+<h2 id="synchronized-的功能扩展：重入锁"><a href="#synchronized-的功能扩展：重入锁" class="headerlink" title="synchronized 的功能扩展：重入锁"></a>synchronized 的功能扩展：重入锁</h2><p>重入锁使用 <code>java.util.concurrent.locks.ReentrantLock</code> 类来实现，它可以完全替代 synchronized 关键字。在 JDK5.0 的早期版本中，重入锁的性能远远好于 synchronized，但从 JDK6.0 开始，JDK 在 synchronized 上做了大量的优化，使得两者的性能差距并不大。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/09/08/jdk-concurrent-package/#more" rel="contents">
